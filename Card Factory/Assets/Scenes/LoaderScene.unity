@@ -244,7 +244,6 @@ MonoBehaviour:
   QueueManager: {fileID: 0}
   ConveyorManager: {fileID: 0}
   BoosterManager: {fileID: 0}
-  gameData: {fileID: 1470759720}
   poolManager: {fileID: 0}
   rewardConfig: {fileID: 11400000, guid: ea039eba35197534b90a400248ed6247, type: 2}
   boosterConfig: {fileID: 11400000, guid: e5ad787a2ef58164cb1e8613d01ca872, type: 2}
@@ -257,8 +256,8 @@ MonoBehaviour:
     featureIcon: {fileID: 0}
   currentGold: 0
   currentLevel: 0
-  maxheart: 0
-  heartRefillTime: 0
+  maxheart: 5
+  heartRefillTime: 30
   currentHeart: 0
   isFirstTime: 0
 --- !u!4 &678601752
