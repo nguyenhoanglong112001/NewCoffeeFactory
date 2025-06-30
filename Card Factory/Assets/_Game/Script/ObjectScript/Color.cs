@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using cakeslice;
 public enum CardColor
 {
     Red = 0,
@@ -13,7 +14,7 @@ public enum CardColor
 }
 public static class ColorSetup
 {
-    public static void SetCardColor(CardColor colorSet,Material mat)
+    public static void SetMatColor(CardColor colorSet,Material mat)
     {
         mat.mainTextureScale = Vector2.zero;
         switch (colorSet)
@@ -51,7 +52,7 @@ public static class ColorSetup
         }
     }
 
-    public static void SetUpColorForUI(CardColor colorSet, Image image)
+    public static void SetUpObjectColor(CardColor colorSet, Image image)
     {
         switch (colorSet)
         {
@@ -88,6 +89,52 @@ public static class ColorSetup
                     break;
                 }
         }
+    }
+
+    public static Color GetColor(CardColor colorSet)
+    {
+        Color color = Color.white;
+        switch (colorSet)
+        {
+            case CardColor.Red:
+                {
+                    color = new Color(220f / 255f, 20f / 255f, 60f / 255f);
+                    break;
+                }
+            case CardColor.Green:
+                {
+                    color = new Color(0f / 255f, 255f / 255f, 0f / 255f);
+                    break;
+                }
+            case CardColor.Blue:
+                {
+                    color = new Color(0f / 255f, 0f / 255f, 255f / 255f);
+                    break;
+                }
+            case CardColor.Yellow:
+                {
+                    color = new Color(255f / 255f, 255f / 255f, 0f / 255f);
+                    break;
+                }
+            case CardColor.Purple:
+                {
+                    // Thêm màu cho Purple, ví d?: RGB (128, 0, 128)
+                    color = new Color(128f / 255f, 0f / 255f, 128f / 255f);
+                    break;
+                }
+            case CardColor.Orange:
+                {
+                    // Thêm màu cho Orange, ví d?: RGB (255, 165, 0)
+                    color = new Color(255f / 255f, 165f / 255f, 0f / 255f);
+                    break;
+                }
+        }
+        return color;
+    }
+
+    public static void SetCustomOutlineColor(CardColor colorSet)
+    {
+        OutlineEffect.Instance.lineColor2 = GetColor(colorSet);
     }
 
     public static void SetHiddenUI(Image holderImage)

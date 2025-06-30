@@ -28,7 +28,7 @@ public class HiddenPackMechanic : BasePackMechanic
         foreach (var rend in packOwner.rends)
         {
             Material mat = rend.material;
-            ColorSetup.SetCardColor(packOwner.colorHolder,mat);
+            ColorSetup.SetMatColor(packOwner.colorHolder,mat);
         }
     }
 

@@ -21,8 +21,8 @@ public class GameManager : Singleton<GameManager>
     public QueueManager QueueManager;
     public ConveyorManager ConveyorManager;
     public BoosterManager BoosterManager;
-    public GameDataManager gameData;
     public ObjectPoolManager poolManager;
+    public RectTransform MainCanvasRect;
 
     public GoldConfig rewardConfig;
     public BoosterConfig boosterConfig;
@@ -52,19 +52,23 @@ public class GameManager : Singleton<GameManager>
         if(Exists())
         {
             Destroy(gameObject);
+            return;
         }
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void Start()
     {
-        AudioManager.Ins.InitializeAudioManager();
-        AudioManager.Ins.PlayMusic("BackGroundMenu");
-        EventManager.OnLevelComplete.AddListener(CheckFeatureUnlock);
-        if(isFirstTime)
+        GetData();
+        if (GameDataManager.Ins.gamedata.isFirstTime)
         {
             OnChangeGameState(GameState.GamePlay);
         }
+        else
+        {
+            OnChangeGameState(GameState.MainMenu);
+        }
+        AudioManager.Ins.PlayMusic("BackGroundMenu");
     }
 
     private void Update()
@@ -78,9 +82,9 @@ public class GameManager : Singleton<GameManager>
     public void InitGame()
     {
         Time.timeScale = 1.0f;
-        BoosterManager.addConveyCount = gameData.gamedata.GetBoosterData(BoosterType.AddConvey);
-        BoosterManager.swapCount = gameData.gamedata.GetBoosterData(BoosterType.Swap);
-        BoosterManager.removePackCount = gameData.gamedata.GetBoosterData(BoosterType.RemovePack);
+        BoosterManager.addConveyCount = GameDataManager.Ins.gamedata.GetBoosterData(BoosterType.AddConvey);
+        BoosterManager.swapCount = GameDataManager.Ins.gamedata.GetBoosterData(BoosterType.Swap);
+        BoosterManager.removePackCount = GameDataManager.Ins.gamedata.GetBoosterData(BoosterType.RemovePack);
         LevelManager.Ins.InitLevel();
         BoosterManager.InitBooster();
         UIManager.Ins.InitUI();
@@ -97,14 +101,16 @@ public class GameManager : Singleton<GameManager>
         state = gameState;
         if (gameState == GameState.MainMenu)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadSceneAsync(1);
+            AudioManager.Ins.InitializeAudioManager();
             AudioManager.Ins.StopSound("BackGroundInGameMusic");
             AudioManager.Ins.PlayMusic("BackGroundMenu");
 
         }
         else if (gameState == GameState.GamePlay)
         {
-            SceneManager.LoadSceneAsync(1);
+            SceneManager.LoadSceneAsync(2);
+            AudioManager.Ins.InitializeAudioManager();
             AudioManager.Ins.PlayMusic("BackGroundInGameMusic");
             AudioManager.Ins.StopSound("BackGroundMenu");
         }
@@ -128,16 +134,16 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveData()
     {
-        gameData.SaveData();
+        GameDataManager.Ins.SaveData();
     }
 
     public void GetData()
     {
-        gameData.LoadData();
-        currentGold = gameData.gamedata.currentCoin;
-        currentLevel = gameData.gamedata.currentLevel;
-        isFirstTime = gameData.gamedata.isFirstTime;
-        currentFeatureid = gameData.gamedata.currentFeatureId;
+        GameDataManager.Ins.LoadData();
+        currentGold = GameDataManager.Ins.gamedata.currentCoin;
+        currentLevel = GameDataManager.Ins.gamedata.currentLevel;
+        isFirstTime = GameDataManager.Ins.gamedata.isFirstTime;
+        currentFeatureid = GameDataManager.Ins.gamedata.currentFeatureId;
         currentFeatureUnlock = FeatureUnlockConfig.GetFeatureData(currentFeatureid);
     }
 
@@ -146,7 +152,7 @@ public class GameManager : Singleton<GameManager>
         if (currentLevel == currentFeatureUnlock.levelUnlock)
         {
             currentFeatureid++;
-            gameData.gamedata.currentFeatureId = currentFeatureid;
+            GameDataManager.Ins.gamedata.currentFeatureId = currentFeatureid;
             SaveData();
         }
     }
@@ -172,7 +178,7 @@ public class GameManager : Singleton<GameManager>
     public void OnUpdateCoin(int amount)
     {
         currentGold += amount;
-        gameData.gamedata.currentCoin = currentGold;
+        GameDataManager.Ins.gamedata.currentCoin = currentGold;
         SaveData();
         EventManager.OnCoinchange.Invoke(currentGold);
     }
@@ -185,8 +191,8 @@ public class GameManager : Singleton<GameManager>
             BoosterManager = GameObject.FindAnyObjectByType<BoosterManager>();
             poolManager = GameObject.FindAnyObjectByType<ObjectPoolManager>();
             QueueManager = GameObject.FindAnyObjectByType<QueueManager>();
-            TutorialInGameManager.Ins.currentTutIndex = gameData.gamedata.currentTutIndex;
-            TutorialInGameManager.Ins.completeList = gameData.gamedata.tutorialComplete;
+            TutorialInGameManager.Ins.currentTutIndex = GameDataManager.Ins.gamedata.currentTutIndex;
+            TutorialInGameManager.Ins.completeList = GameDataManager.Ins.gamedata.tutorialComplete;
             InitGame();
         }
         if(scene.name == "MainMenu")
@@ -194,6 +200,7 @@ public class GameManager : Singleton<GameManager>
             GetData();
             LoadHeartData();
             MainMenuManager.Ins.InitMenuUI();
+            EventManager.OnLevelComplete.AddListener(CheckFeatureUnlock);
         }
     }
 

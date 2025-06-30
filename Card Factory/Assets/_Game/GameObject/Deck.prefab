@@ -2225,6 +2225,8 @@ MonoBehaviour:
   - {fileID: 583094163037006620}
   - {fileID: 5471511690665748424}
   - {fileID: 8991881506424131895}
+  extenderObject: {fileID: 0}
+  countForTut: 0
 --- !u!1 &3674166921760115437
 GameObject:
   m_ObjectHideFlags: 0
@@ -4320,7 +4322,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3250031344550743186}
-  - component: {fileID: 4812014372242597265}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -4374,28 +4375,6 @@ Transform:
   - {fileID: 4544401752138252027}
   m_Father: {fileID: 5152244773202388405}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
---- !u!95 &4812014372242597265
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8294824234065369792}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 337de85c0283af644b3ff8db2f02ec7f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8403370810186682996
 GameObject:
   m_ObjectHideFlags: 0

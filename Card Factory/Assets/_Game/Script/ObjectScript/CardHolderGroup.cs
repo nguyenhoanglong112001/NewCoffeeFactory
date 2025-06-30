@@ -43,9 +43,7 @@ public class CardHolderGroup : MonoBehaviour
     {
         int completeCount = 0;
         isReordering = true;
-
-
-        if(cardHolders.Count <= 1)
+        if (cardHolders.Count <= 1)
         {
             onComplete.Invoke();
         }
@@ -54,7 +52,7 @@ public class CardHolderGroup : MonoBehaviour
             cardHolders[i].transform.DOLocalMove(holderPos[i - 1], 0.2f).
                 OnComplete(() =>
                 {
-                    if (i == 0)
+                    if (i - 1 == 0)
                     {
                         if (cardHolders[i].HaveMechanic)
                         {
@@ -82,7 +80,7 @@ public class CardHolderGroup : MonoBehaviour
             }
             else
             {
-                ColorSetup.SetUpColorForUI(cardHolders[1].colorHolder,holderNextImage);
+                ColorSetup.SetUpObjectColor(cardHolders[1].colorHolder,holderNextImage);
             }
         }
         if(cardHolders.Count <= 0)

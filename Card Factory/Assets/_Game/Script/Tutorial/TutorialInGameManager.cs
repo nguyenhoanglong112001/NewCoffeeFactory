@@ -62,7 +62,7 @@ public class TutorialInGameManager : Singleton<TutorialInGameManager>
                     {
                         foreach (var card in LevelManager.Ins.queues[1].cards)
                         {
-                            card.GetComponent<MeshCollider>().enabled = true;
+                            card.canPress = true;
                         }
                     }
                 });

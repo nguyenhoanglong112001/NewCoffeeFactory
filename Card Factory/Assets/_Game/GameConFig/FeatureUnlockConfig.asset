@@ -16,5 +16,15 @@ MonoBehaviour:
   - featureID: 1
     featureName: New Color
     levelUnlock: 3
-    description: You have unlock new color
+    description: You have unlock Green Cups
     featureIcon: {fileID: 21300000, guid: a1d092e199f274d498f47251136003de, type: 3}
+  - featureID: 2
+    featureName: Hidden Cups
+    levelUnlock: 7
+    description: Hidden Color Of Cups. Get the cups above to show color
+    featureIcon: {fileID: 0}
+  - featureID: 3
+    featureName: New Color
+    levelUnlock: 11
+    description: You have unlock Yellow Cups
+    featureIcon: {fileID: 0}

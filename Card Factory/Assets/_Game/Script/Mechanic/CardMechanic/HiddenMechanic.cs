@@ -31,7 +31,7 @@ public class HiddenMechanic : BaseCardMechanics
             foreach (var rend in card.rend)
             {
                 Material mat = rend.material;
-                ColorSetup.SetCardColor(cardOwner.listColor, mat);
+                ColorSetup.SetMatColor(cardOwner.listColor, mat);
             }
         }
     }

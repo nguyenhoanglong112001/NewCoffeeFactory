@@ -38,7 +38,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void InitLevel()
     {
-        if(GameManager.Ins.isFirstTime)
+        if (GameManager.Ins.isFirstTime)
         {
             InitForTut(GameManager.Ins.currentLevel);
         }
@@ -59,24 +59,24 @@ public class LevelManager : Singleton<LevelManager>
     {
         level = Resources.Load<LevelDataSO>("LevelData/Level " + levelLoad);
         LevelLoader();
-        if(levelLoad == 1)
+        if (levelLoad == 1)
         {
             foreach (var card in queues[1].cards)
             {
-                card.GetComponent<MeshCollider>().enabled = false;
+                card.canPress = false;
             }
             TutorialInGameManager.Ins.StartTut();
             TutorialStage currentStage = TutorialInGameManager.Ins.GetCurrentTut().GetCurrentStage();
             currentStage.SetHandPointPos(queues[0].cardPos[0], new Vector3(-1, 3, -9));
         }
-        if(levelLoad == 2)
+        if (levelLoad == 2)
         {
             TutorialInGameManager.Ins.StartTut();
             TutorialStage currentStage = TutorialInGameManager.Ins.GetCurrentTut().GetCurrentStage();
             currentStage.SetHandPointPos(queues[0].cardPos[0], new Vector3(-1, 3, -9));
             foreach (var card in queues[1].cards)
             {
-                card.GetComponent<MeshCollider>().enabled = false;
+                card.canPress = false;
             }
         }
     }
@@ -85,7 +85,7 @@ public class LevelManager : Singleton<LevelManager>
     private void SpawnCardList()
     {
     }
-    
+
     private int GetNumberHolder()
     {
         return numberHolder;
@@ -126,7 +126,7 @@ public class LevelManager : Singleton<LevelManager>
     public void OnCheckWingame()
     {
         numberHolder = GetTotalHolder();
-        if(numberHolder <= 0)
+        if (numberHolder <= 0)
         {
             isGameOver = true;
             isLevelComplete = true;
@@ -170,7 +170,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         CardQueue queuePrefab = level.queuePrefab;
         CardList cardPrefab = level.CoffeCups;
-        if(queuePrefab != null )
+        if (queuePrefab != null)
         {
             objectLayout.constraintCount = level.queueData.Count;
             foreach (var queue in level.queueData)
@@ -181,7 +181,8 @@ public class LevelManager : Singleton<LevelManager>
                 foreach (var cardList in queue.cardData)
                 {
                     GameManager.Ins.poolManager.cardGroupPool.Prefab = cardPrefab.gameObject;
-                    GameObject cardObj = GameManager.Ins.poolManager.cardGroupPool.Spawn(Vector3.zero, Quaternion.identity, cardqueue.transParent);
+                    GameObject cardObj = GameManager.Ins.poolManager.cardGroupPool.Spawn(Vector3.zero, Quaternion.identity);
+                    cardObj.transform.SetParent(cardqueue.transParent);
                     cardObj.transform.localPosition = Vector3.zero;
                     cardObj.transform.localRotation = Quaternion.identity;
                     CardList card = cardObj.GetComponent<CardList>();
@@ -197,14 +198,14 @@ public class LevelManager : Singleton<LevelManager>
     }
     private void SpawnConvey()
     {
-        GameObject conveyPrefab = level.ConveyorPrefab;
+        GameObject conveyPrefab = level.ConveyorPrefab.gameObject;
         SplineComputer splineCom = null;
         CardHolderGroup holderGroupPrefab = level.holderGroupPrefab;
         if (conveyPrefab != null)
         {
             GameObject conveyor = Instantiate(conveyPrefab, conveySpawnPos.position, conveyPrefab.transform.rotation, conveySpawnPos);
             GameManager.Ins.BoosterManager.targetPos = conveyor.transform;
-            conveyor.transform.position += level.ConveyorOffset;
+            conveyor.transform.position += level.ConveyorPrefab.ConveyorOffset;
             ConveyorManager conveyorManager = conveyor.GetComponent<ConveyorManager>();
             GameManager.Ins.ConveyorManager = conveyorManager;
             splineCom = conveyorManager.spline;
@@ -217,7 +218,7 @@ public class LevelManager : Singleton<LevelManager>
                 GameObject group = Instantiate(holderGroupPrefab.gameObject, spawnPos, conveyPrefab.transform.rotation, null);
                 Quaternion rotation = Quaternion.Euler(level.HolderPoints[i].holderRotate);
                 group.transform.rotation = rotation;
-                group.transform.position += level.ConveyorOffset;
+                group.transform.position += level.ConveyorPrefab.ConveyorOffset;
 
                 CardHolderGroup groupHolder = group.GetComponent<CardHolderGroup>();
                 groupHolder.groupPos = percent;
@@ -228,7 +229,8 @@ public class LevelManager : Singleton<LevelManager>
                 for (int j = 0; j < level.HolderPoints[i].holderDatas.Length; j++)
                 {
 
-                    GameObject holderObj = GameManager.Ins.poolManager.packPool.Spawn(groupHolder.starPos.position, Quaternion.identity, group.transform);
+                    GameObject holderObj = GameManager.Ins.poolManager.packPool.Spawn(groupHolder.starPos.position, Quaternion.identity);
+                    holderObj.transform.SetParent(group.transform);
                     CardHolder holder = holderObj.GetComponent<CardHolder>();
 
                     holder.transform.localRotation = Quaternion.identity;

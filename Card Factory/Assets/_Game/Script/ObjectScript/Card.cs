@@ -32,6 +32,8 @@ public class Card : MonoBehaviour
 
     [HideInInspector] public Vector3 lastPosOnQueue;
 
+    public bool canPress;
+
     private void Start()
     {
         queueManager = GameManager.Ins.QueueManager;
@@ -54,16 +56,43 @@ public class Card : MonoBehaviour
         follower.onEndReached -= OnCardEndConvey;
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void OnMouseDown()
     {
-        EnableCardOutLine(true);
+        if (!canPress) return;
         if (GameManager.Ins.isPause) return;
         if (GameManager.Ins.IsPointerOverUIObject())
         {   
             return;
         }
-        if (conveyorManager.isAllCardMove) return;
-        if(GameManager.Ins.isFirstTime && TutorialInGameManager.Ins.isOnTutorial)
+        List<Card> cardSame = new List<Card>();
+        if (isOnQueue)
+        {
+            cardSame = GetListConsecutiveCard(this, queueManager.cardInQueue);
+        }
+        if (isOnSpawnQueue)
+        {
+            cardSame = GetListConsecutiveCard(this, cardQueue.cards);
+        }
+        if (conveyorManager.isFullConvey(cardSame))
+        {
+            EnableCardOutLine(false);
+            return;
+        }
+        if(isOnSpawnQueue)
+        {
+            if(cardQueue.cards[0] != cardSame[0])
+            {
+                EnableCardOutLine(false);
+                return;
+            }
+        }
+        EnableCardOutLine(true);
+        if (GameManager.Ins.isFirstTime && TutorialInGameManager.Ins.isOnTutorial)
         {
             Tutorial currentTut = TutorialInGameManager.Ins.GetCurrentTut();
             if(currentTut != null)
@@ -79,15 +108,28 @@ public class Card : MonoBehaviour
 
     private void OnMouseUp()
     {
-        EnableCardOutLine(false);
+        if (!canPress) return;
+        List<Card> cardSame = new List<Card>();
+        if (isOnQueue)
+        {
+            cardSame = GetListConsecutiveCard(this, queueManager.cardInQueue);
+        }
+        if (isOnSpawnQueue)
+        {
+            cardSame = GetListConsecutiveCard(this, cardQueue.cards);
+        }
+        foreach (var card in cardSame)
+        {
+            card.cardOutline.enabled = false;
+        }
         if (GameManager.Ins.isPause) return;
-        if (conveyorManager.isAllCardMove) return;
         OnCardPress();
     }
 
     private void EnableCardOutLine(bool isActive)
     {
         List<Card> cardSame = new List<Card>();
+        int colorIndex = 0;
         if (isOnQueue)
         {
             cardSame = GetListConsecutiveCard(this, queueManager.cardInQueue);
@@ -96,16 +138,24 @@ public class Card : MonoBehaviour
         {
             cardSame = GetListConsecutiveCard(this, cardQueue.cards);
         }
+        if(isActive)
+        {
+            colorIndex = 1;
+        }
+        else
+        {
+            colorIndex = 0;
+        }
         foreach (var card in cardSame)
         {
-            card.cardOutline.enabled = isActive;
+            card.cardOutline.enabled = true;
+            card.cardOutline.color = colorIndex;
         }
     }
 
     private void OnCardPress()
     {
         if (GameManager.Ins.BoosterManager.currentBooster != BoosterType.None) return;
-        conveyorManager.isAllCardMove = true;
         List<Card> cardSameColor = new List<Card>();
         if (cardQueue.cards.Contains(this))
         {
@@ -121,16 +171,12 @@ public class Card : MonoBehaviour
                         {
                             foreach (var card in queue.cards)
                             {
-                                card.GetComponent<MeshCollider>().enabled = false;
+                                card.canPress = false;
                             }
                         }
                         StartCoroutine(queueManager.WaitToFullQueue());
                     }
                 }
-            }
-            if (conveyorManager.isFullConvey(cardSameColor))
-            {
-                conveyorManager.isAllCardMove = false;
             }
             if (cardQueue.cards[0] == cardSameColor[0])
             {
@@ -140,6 +186,7 @@ public class Card : MonoBehaviour
 
                 }));
             }
+
         }
         else if (queueManager.cardInQueue.Contains(this))
         {
@@ -154,17 +201,13 @@ public class Card : MonoBehaviour
                         {
                             foreach (var card in LevelManager.Ins.queues[1].cards)
                             {
-                                card.GetComponent<MeshCollider>().enabled = true;
+                                card.canPress = true;
                             }
                         });
                     }
                 }
             }
             cardSameColor = GetListConsecutiveCard(this, queueManager.cardInQueue);
-            if (conveyorManager.isFullConvey(cardSameColor))
-            {
-                conveyorManager.isAllCardMove = false;
-            };
             StartCoroutine(CardSameMoveToConvey(cardSameColor, () =>
             {
             }));
@@ -228,20 +271,21 @@ public class Card : MonoBehaviour
         this.transform.DOMove(queueSlot.transform.position, 0.3f).SetUpdate(true)
             .OnComplete(() =>
             {
-                this.GetComponent<MeshCollider>().enabled = true;
+                canPress = true;
                 if (TutorialInGameManager.Ins.isOnTutorial && GameManager.Ins.isFirstTime)
                 {
                     if (GameManager.Ins.BoosterManager.CheckForTutBooster(BoosterType.AddQueueSlot))
                     {
-                        this.GetComponent<MeshCollider>().enabled = false;
+                        canPress = false;
                     }
                 }
             });
         CheckList();
     }
 
-    private void CardMoveToConvey(Action onComplete)
+    private void CardMoveToConvey(Action onComplete = null)
     {
+        onComplete.Invoke();
         AudioManager.Ins.PlaySound("CardSound");
         Sequence moveTween = DOTween.Sequence();
         moveTween.Append(this.transform.DOJump(conveyorManager.conveyEntrace.position, 4f, 1, 0.5f));
@@ -252,7 +296,7 @@ public class Card : MonoBehaviour
             conveyorManager.SetSpline(follower);
             conveyorManager.OnAddFollower(follower);
             follower.enabled = false;
-            onComplete.Invoke();
+            conveyorManager.CheckSpacing(follower);
         });
     }
 
@@ -269,7 +313,7 @@ public class Card : MonoBehaviour
         {
             Card card = cardSame[i];
             if (card.cardList.mechanicType == CardMechanic.Chain) yield break;
-            card.GetComponent<MeshCollider>().enabled = false;
+            card.canPress = false;
             if(cardSame.All(x => queueManager.cardInQueue.Contains(x)))
             {
                 foreach (var cardinQueue in cardSame)
@@ -302,42 +346,9 @@ public class Card : MonoBehaviour
                     cardQueue.cards.Remove(card);
                     LevelManager.Ins.cards.Remove(card);
                     card.isOnSpawnQueue = false;
-
                     if (completeCount == total)
                     {
-                        if (GameManager.Ins.isFirstTime && TutorialInGameManager.Ins.isOnTutorial)
-                        {
-                            var tutStage = TutorialInGameManager.Ins.GetCurrentTutStage();
-                            Debug.Log(tutStage == (2,3));
-                            if (TutorialInGameManager.Ins.currentTutIndex != 1)
-                            {
-                                if(tutStage != (2,3))
-                                {
-                                    TutorialInGameManager.Ins.OnActiveTutorial(LevelManager.Ins.queues[0].cardPos[0], new Vector3(-1, 3, -9));
-                                }
-                            }
-                        }
-                        if(GameManager.Ins.BoosterManager.CheckForTutBooster(BoosterType.AddConvey))
-                        {
-                            if(TutorialInGameManager.Ins.currentTutIndex == 4)
-                            {
-                                TutorialInGameManager.Ins.StartTut(() =>
-                                {
-                                    GameManager.Ins.BoosterManager.boosterCount[BoosterType.AddConvey] = 10;
-                                    Time.timeScale = 0.0f;
-                                    foreach (var queue in LevelManager.Ins.queues)
-                                    {
-                                        foreach (var card in queue.cards)
-                                        {
-                                            card.GetComponent<MeshCollider>().enabled = false;
-                                        }
-                                    }
-                                });
-                                TutorialStage currentStage = TutorialInGameManager.Ins.GetCurrentTut().GetCurrentStage();
-                                currentStage.SetHandPointPos(UIManager.Ins.addCapacityConvey.gameObject.transform.position, new Vector3(1, 1, -1.5f));
-                            }
-                        }
-                        StartCoroutine(DelaySetIsAllCardMove());
+                        CardMoveToConveyTut();
                         oncomplete?.Invoke();
                     }
                 }
@@ -345,31 +356,52 @@ public class Card : MonoBehaviour
                 {
                     completeCount++;
                     card.isOnQueue = false;
+                    oncomplete?.Invoke();
                     if (completeCount == total)
                     {
-                        StartCoroutine(DelaySetIsAllCardMove());
                         oncomplete?.Invoke();
                     }
                 }
-                StartCoroutine(StartFollowerWithDelay(card.follower, delayForFollower));
             });
 
-            yield return new WaitForSecondsRealtime(0.1f);
+            yield return new WaitForSecondsRealtime(0.05f);
         }
     }
 
-    private IEnumerator DelaySetIsAllCardMove()
+    private void CardMoveToConveyTut()
     {
-        yield return new WaitForSeconds(0.05f);
-        conveyorManager.isAllCardMove = false;
-    }
-
-    private IEnumerator StartFollowerWithDelay(SplineFollower follower, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        follower.SetPercent(0f);
-        follower.enabled = true;
+        if (GameManager.Ins.isFirstTime && TutorialInGameManager.Ins.isOnTutorial)
+        {
+            var tutStage = TutorialInGameManager.Ins.GetCurrentTutStage();
+            Debug.Log(tutStage == (2, 3));
+            if (TutorialInGameManager.Ins.currentTutIndex != 1)
+            {
+                if (tutStage != (2, 3))
+                {
+                    TutorialInGameManager.Ins.OnActiveTutorial(LevelManager.Ins.queues[0].cardPos[0], new Vector3(-1, 3, -9));
+                }
+            }
+        }
+        if (GameManager.Ins.BoosterManager.CheckForTutBooster(BoosterType.AddConvey))
+        {
+            if (TutorialInGameManager.Ins.currentTutIndex == 4)
+            {
+                TutorialInGameManager.Ins.StartTut(() =>
+                {
+                    GameManager.Ins.BoosterManager.boosterCount[BoosterType.AddConvey] = 10;
+                    Time.timeScale = 0.0f;
+                    foreach (var queue in LevelManager.Ins.queues)
+                    {
+                        foreach (var card in queue.cards)
+                        {
+                            card.canPress = false;
+                        }
+                    }
+                });
+                TutorialStage currentStage = TutorialInGameManager.Ins.GetCurrentTut().GetCurrentStage();
+                currentStage.SetHandPointPos(UIManager.Ins.addCapacityConvey.gameObject.transform.position, new Vector3(1, 1, -1.5f));
+            }
+        }
     }
 
     public List<Card> GetListConsecutiveCard(Card card, List<Card> cards)
@@ -410,7 +442,6 @@ public class Card : MonoBehaviour
         AudioManager.Ins.PlaySound("CardSound");
         Sequence moveToHolder = DOTween.Sequence();
         CardHolder cupsHolder = holder.cardHolders[0];
-
         foreach (var holdercard in cupsHolder.cardHolderPos)
         {
             if(holdercard.childCount <= 0)
@@ -431,15 +462,15 @@ public class Card : MonoBehaviour
         ));
         moveToHolder.Join(transform.DORotate(Vector3.zero, 0.6f));
         Vector3 orgScale = cupsHolder.transform.localScale;
-        cupsHolder.packAnimation.Play();
         moveToHolder.OnComplete(() =>
         {
+            cupsHolder.packAnimation.Play();
             conveyorManager.OnRemoveFollower(follower);
             cardList.cards.Remove(this);
             cardList.CheckCard();
+            CheckList();
             holder.cardHolders[0].cardHolder.Add(this);
             holder.cardHolders[0].CheckHolder();
-            CheckList();
         });
     }
 
@@ -457,7 +488,7 @@ public class Card : MonoBehaviour
         foreach (var render in rend)
         {
             Material mat = render.material;
-            ColorSetup.SetCardColor(color, mat);
+            ColorSetup.SetMatColor(color, mat);
         }
     }   
 
@@ -487,7 +518,7 @@ public class Card : MonoBehaviour
         follower.spline = null;
         conveyorManager.OnRemoveFollower(follower);
         OnSplineEnd();
-                follower.enabled = false;
+        follower.enabled = false;
         cardrb.isKinematic = false;
         cardrb.useGravity = true;
         cardCollider.isTrigger = false;

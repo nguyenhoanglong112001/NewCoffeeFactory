@@ -10,9 +10,10 @@ public class GameDataManager : Singleton<GameDataManager>
     public GameData gamedata;
     private void Awake()
     {
-        if(Exists())
+        if (Exists())
         {
             Destroy(gameObject);
+            return;
         }
         DontDestroyOnLoad(gameObject);
     }

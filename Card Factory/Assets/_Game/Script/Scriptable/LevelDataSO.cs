@@ -8,7 +8,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelDataSO", menuName = "LevelData/LevelDataSO")]
 public class LevelDataSO : ScriptableObject
 {
-    public GameDataManager gameData;
     public int level;
     public HolderType[] HolderType;
     
@@ -16,9 +15,8 @@ public class LevelDataSO : ScriptableObject
 
     public List<QueueData> queueData;
 
-    public GameObject ConveyorPrefab;
+    public ConveyorManager ConveyorPrefab;
 
-    public Vector3 ConveyorOffset;
     public Vector3 holderOffset;
 
     public CardQueue queuePrefab;
@@ -28,7 +26,7 @@ public class LevelDataSO : ScriptableObject
 
     public CardList CoffeCups;
 
-
+#if UNITY_EDITOR
     [Button]
     public void CheckHolderAndCups()
     {
@@ -61,13 +59,7 @@ public class LevelDataSO : ScriptableObject
             Debug.Log("Thieu so luong holder slot: " + (totalCupsCount * 6 - totalHolderSlotCount));
         }
     }
-
-    [Button]
-    public void SetLevelTest()
-    {
-        gameData.gamedata.currentLevel = level;
-        gameData.SaveData();
-    }
+#endif
 }
 
 [Serializable]

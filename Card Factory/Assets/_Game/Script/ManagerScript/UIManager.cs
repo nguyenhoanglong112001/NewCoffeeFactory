@@ -253,7 +253,8 @@ public class UIManager : Singleton<UIManager>
     {
         foreach (var key in boostersCostText.Keys)
         {
-            if(GameManager.Ins.BoosterManager.CheckForTutBooster(key))
+            boostersCostText[key].transform.parent.gameObject.SetActive(GameManager.Ins.currentLevel >= GameManager.Ins.boosterConfig.GetBoosterByType(key).levelUnlock);
+            if (GameManager.Ins.BoosterManager.CheckForTutBooster(key))
             {
                 boostersCostText[key].transform.parent.gameObject.SetActive(false);
             }

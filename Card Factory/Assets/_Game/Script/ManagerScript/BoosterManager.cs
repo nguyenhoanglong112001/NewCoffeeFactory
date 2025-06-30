@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Dreamteck;
+using MoreMountains.Feedbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,9 +31,14 @@ public class BoosterManager : MonoBehaviour
     public int removePackCount;
 
     public Dictionary<BoosterType, int> boosterCount;
+    public Dictionary<BoosterType,MMF_Player> mmfLock;
 
     public GameObject hammmer;
     public GameObject hammerSmashVfx;
+
+    public MMF_Player addConveyLock;
+    public MMF_Player swapConveyLock;
+    public MMF_Player hammerLock;
 
 
     public int NumberSlotAdd { get => numberSlotAdd; set => numberSlotAdd = value; }
@@ -48,6 +54,13 @@ public class BoosterManager : MonoBehaviour
             {BoosterType.AddConvey,addConveyCount},
             {BoosterType.RemovePack,removePackCount},
         };
+
+        mmfLock = new Dictionary<BoosterType, MMF_Player>
+        {
+            {BoosterType.Swap,swapConveyLock },
+            {BoosterType.AddConvey,addConveyLock },
+            {BoosterType.RemovePack,hammerLock }
+        };
     }
     public void SetCurrentBooster(int boosterChoose)
     {
@@ -60,7 +73,11 @@ public class BoosterManager : MonoBehaviour
         }
         if (boosterCount[(BoosterType)boosterChoose] <= 0)
         {
-            if (GameManager.Ins.currentLevel < config.GetBoosterByType((BoosterType)boosterChoose).levelUnlock) return;
+            if (GameManager.Ins.currentLevel < config.GetBoosterByType((BoosterType)boosterChoose).levelUnlock)
+            {
+                mmfLock[(BoosterType)boosterChoose].PlayFeedbacks();
+                return;
+            }
             if(GameManager.Ins.currentGold < config.GetBoosterByType((BoosterType)boosterChoose).boosterCost)
             {
                 UIManager.Ins.OnShowShopUI();
@@ -127,7 +144,7 @@ public class BoosterManager : MonoBehaviour
                     {
                         foreach (var card in queue.cards)
                         {
-                            card.GetComponent<MeshCollider>().enabled = true;
+                            card.canPress = true;
                         }
                     }
                 });
@@ -142,7 +159,7 @@ public class BoosterManager : MonoBehaviour
             UIManager.Ins.mainCanvas.GetComponentInParent<Canvas>().worldCamera,
             out uiPos
         );
-
+        Debug.Log(uiPos);
         UIManager.Ins.OnShowAddConveyPopUp(addConveyBt, uiPos, () =>
         {
             GameManager.Ins.ConveyorManager.AddMaxCardOnConvey(NumberAdd);
@@ -209,7 +226,6 @@ public class BoosterManager : MonoBehaviour
             holderGroup.AllHolderMoveFront(() =>
             {
                 holderGroup.cardHolders.Remove(holder);
-                holderGroup.CheckHolder();
                 foreach (var holder in holderGroup.cardHolders)
                 {
                     holder.CheckToShowHolder();
@@ -311,13 +327,13 @@ public class BoosterManager : MonoBehaviour
             {
                 foreach (var cards in GameManager.Ins.QueueManager.cardInQueue)
                 {
-                    cards.GetComponent<MeshCollider>().enabled = true;
+                    cards.canPress = true;
                 }
                 foreach (var queue in LevelManager.Ins.queues)
                 {
                     foreach (var card in queue.cards)
                     {
-                        card.GetComponent<MeshCollider>().enabled = true;
+                        card.canPress = true;
                     }
                 }
             });

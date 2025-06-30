@@ -96,7 +96,7 @@ public class MainMenuManager : Singleton<MainMenuManager>
     {
         LevelDataSO[] allLevels = Resources.LoadAll<LevelDataSO>("LevelData");
         int maxLevelCount = allLevels.Length;
-        if(GameManager.Ins.gameData.gamedata.currentLevel > maxLevelCount)
+        if(GameDataManager.Ins.gamedata.currentLevel > maxLevelCount)
         {
             return true;
         }

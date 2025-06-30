@@ -285,8 +285,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 429995415662364020}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9807445, z: -0, w: -0.19529544}
-  m_LocalPosition: {x: -4.500001, y: 0, z: 1.5999998}
+  m_LocalRotation: {x: -0, y: 0.98398465, z: -0, w: -0.17825328}
+  m_LocalPosition: {x: -4.500001, y: 0, z: 1.9200001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -324,16 +324,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: -1.0500007, y: -0.04, z: 6.74}
+    position: {x: 0.1299994, y: -0.04, z: 8.459999}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.00000007947286, y: 0, z: -1}
+    forward: {x: 0.00000007947286, y: 0, z: -1.2}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -378,9 +378,9 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 9221624446222167774}
   _result:
-    position: {x: -1.0500009, y: -0.04, z: 10.339999}
+    position: {x: 0.12999912, y: -0.04, z: 12.78}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.42516997, y: 0, z: -1.0252379}
+    forward: {x: -0.44316995, y: 0, z: -1.1830409}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.800000011920929
@@ -549,7 +549,7 @@ Transform:
   m_GameObject: {fileID: 639135212727583294}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.9999995, y: 0, z: 7}
+  m_LocalPosition: {x: 3, y: 0, z: 8.400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -588,16 +588,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: -1.0500007, y: -0.04, z: 6.74}
+    position: {x: 0.1299994, y: -0.04, z: 8.459999}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.00000007947286, y: 0, z: -1}
+    forward: {x: 0.00000007947286, y: 0, z: -1.2}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -642,7 +642,7 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 942474236896582693}
   _result:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -754,7 +754,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1133595164454062211}
@@ -976,8 +976,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1651865054183698001}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.8524215, z: -0, w: 0.5228552}
-  m_LocalPosition: {x: -3.0000014, y: 0, z: 7}
+  m_LocalRotation: {x: -0, y: 0.8700455, z: -0, w: -0.49297148}
+  m_LocalPosition: {x: -3.0000014, y: 0, z: 8.400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1016,16 +1016,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: -1.0500007, y: -0.04, z: 6.74}
+    position: {x: 0.1299994, y: -0.04, z: 8.459999}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.00000007947286, y: 0, z: -1}
+    forward: {x: 0.00000007947286, y: 0, z: -1.2}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -1070,9 +1070,9 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 4395561634736855630}
   _result:
-    position: {x: 0.44999894, y: -0.04, z: 15.74}
+    position: {x: 1.6299988, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -1.1764548, y: 0, z: -0.59819424}
+    forward: {x: -1.1894861, y: 0, z: -0.7126782}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.4000000059604645
@@ -1210,7 +1210,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1133595164454062211}
@@ -1402,8 +1402,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2838278631600787194}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9951745, z: -0, w: -0.09812126}
-  m_LocalPosition: {x: -4.500001, y: 0, z: -0.19999957}
+  m_LocalRotation: {x: -0, y: 0.99598813, z: -0, w: -0.08948564}
+  m_LocalPosition: {x: -4.500001, y: 0, z: -0.23999977}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1442,16 +1442,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: -1.0500007, y: -0.04, z: 6.74}
+    position: {x: 0.1299994, y: -0.04, z: 8.459999}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.00000007947286, y: 0, z: -1}
+    forward: {x: 0.00000007947286, y: 0, z: -1.2}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -1496,9 +1496,9 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 6821758037784740947}
   _result:
-    position: {x: -1.0500008, y: -0.04, z: 8.54}
+    position: {x: 0.12999925, y: -0.04, z: 10.62}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.20602722, y: 0, z: -1.0346372}
+    forward: {x: -0.21954769, y: 0, z: -1.2119361}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.8999999761581421
@@ -1708,8 +1708,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3920461322919130989}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.92371935, z: -0, w: -0.38306993}
-  m_LocalPosition: {x: -4.5000014, y: 0, z: 5.2}
+  m_LocalRotation: {x: -0, y: 0.93645155, z: -0, w: -0.3507971}
+  m_LocalPosition: {x: -4.500001, y: 0, z: 6.2400007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1748,16 +1748,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: -1.0500007, y: -0.04, z: 6.74}
+    position: {x: 0.1299994, y: -0.04, z: 8.459999}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.00000007947286, y: 0, z: -1}
+    forward: {x: 0.00000007947286, y: 0, z: -1.2}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -1802,9 +1802,9 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 7299327509888312010}
   _result:
-    position: {x: -1.0500013, y: -0.04, z: 13.94}
+    position: {x: 0.12999883, y: -0.04, z: 17.1}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.863253, y: 0, z: -0.86180955}
+    forward: {x: -0.8716183, y: 0, z: -1.0001357}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.6000000238418579
@@ -1851,8 +1851,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3954612265293853743}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9807445, z: -0, w: -0.19529544}
-  m_LocalPosition: {x: -4.500001, y: 0, z: 1.5999998}
+  m_LocalRotation: {x: -0, y: 0.98398465, z: -0, w: -0.17825328}
+  m_LocalPosition: {x: -4.500001, y: 0, z: 1.9200001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1891,16 +1891,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: -1.0500007, y: -0.04, z: 6.74}
+    position: {x: 0.1299994, y: -0.04, z: 8.459999}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.00000007947286, y: 0, z: -1}
+    forward: {x: 0.00000007947286, y: 0, z: -1.2}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -1945,9 +1945,9 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 57617936654751329}
   _result:
-    position: {x: -1.0500009, y: -0.04, z: 10.339999}
+    position: {x: 0.12999912, y: -0.04, z: 12.78}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.42516997, y: 0, z: -1.0252379}
+    forward: {x: -0.44316995, y: 0, z: -1.1830409}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.800000011920929
@@ -1993,14 +1993,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4194108710465943205}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3.99, y: 0, z: 7.12}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 4.2, y: -0.58, z: 8.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7031234925336610453}
   m_Father: {fileID: 6500964586354684493}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &4294311534334303177
 GameObject:
   m_ObjectHideFlags: 0
@@ -2029,7 +2029,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1133595164454062211}
@@ -2173,11 +2173,12 @@ MonoBehaviour:
   rotateObject: {fileID: 1882006459464802783}
   conveyEntrace: {fileID: 4749215233136463796}
   cardOnConvey: []
+  ConveyorOffset: {x: 5, y: 0, z: -6}
   maxCardOnTurn: 20
   levelManager: {fileID: 0}
   followerSpacing: 0
   capitalText: {fileID: 5563980906481372428}
-  isAllCardMove: 0
+  spacingDistance: 1.5
 --- !u!1 &4389672655263974363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2905,8 +2906,8 @@ Transform:
   m_GameObject: {fileID: 5924784119926123485}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -4.72, y: 0, z: -3.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4.8, y: -2.53, z: -3.75}
+  m_LocalScale: {x: 1.2, y: 1, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 197108954861235691}
@@ -2960,14 +2961,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6018806567255781098}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0.05, y: -0.02, z: -1.49}
   m_LocalScale: {x: 0.91783553, y: 0.99135, z: 1.4291266}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1821611286175764734}
   m_Father: {fileID: 534898747748479711}
-  m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!33 &7688729478873047035
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3132,8 +3133,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6313604899545739251}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.78518736, z: -0, w: 0.6192582}
-  m_LocalPosition: {x: -0.00000090301035, y: 0, z: 7}
+  m_LocalRotation: {x: -0, y: -0.7958114, z: -0, w: 0.60554457}
+  m_LocalPosition: {x: -0.0000009536743, y: 0, z: 8.400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3172,16 +3173,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: -1.0500007, y: -0.04, z: 6.74}
+    position: {x: 0.1299994, y: -0.04, z: 8.459999}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.00000007947286, y: 0, z: -1}
+    forward: {x: 0.00000007947286, y: 0, z: -1.2}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -3226,9 +3227,9 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 5313251385924085909}
   _result:
-    position: {x: 3.4499993, y: -0.04, z: 15.74}
+    position: {x: 4.629999, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -1.3710839, y: 0, z: -0.32856148}
+    forward: {x: -1.3910728, y: 0, z: -0.38483548}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.20000000298023224
@@ -3275,8 +3276,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6372299683811683989}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9568492, z: -0, w: -0.29058498}
-  m_LocalPosition: {x: -4.5000014, y: 0, z: 3.4}
+  m_LocalRotation: {x: -0, y: 0.9640859, z: -0, w: -0.2655907}
+  m_LocalPosition: {x: -4.500001, y: 0, z: 4.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3315,16 +3316,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: -1.0500007, y: -0.04, z: 6.74}
+    position: {x: 0.1299994, y: -0.04, z: 8.459999}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.00000007947286, y: 0, z: -1}
+    forward: {x: 0.00000007947286, y: 0, z: -1.2}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -3369,9 +3370,9 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 5211881598646504261}
   _result:
-    position: {x: -1.0500011, y: -0.04, z: 12.14}
+    position: {x: 0.12999897, y: -0.04, z: 14.94}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.6477652, y: 0, z: -0.96813333}
+    forward: {x: -0.6631675, y: 0, z: -1.1122924}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.699999988079071
@@ -3592,8 +3593,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6979720888339936555}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.8202221, z: -0, w: 0.5720453}
-  m_LocalPosition: {x: -1.5000012, y: 0, z: 7}
+  m_LocalRotation: {x: -0, y: -0.83482814, z: -0, w: 0.55051076}
+  m_LocalPosition: {x: -1.500001, y: 0, z: 8.400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3632,16 +3633,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: -1.0500007, y: -0.04, z: 6.74}
+    position: {x: 0.1299994, y: -0.04, z: 8.459999}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.00000007947286, y: 0, z: -1}
+    forward: {x: 0.00000007947286, y: 0, z: -1.2}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -3686,9 +3687,9 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 4808014044404324622}
   _result:
-    position: {x: 1.9499991, y: -0.04, z: 15.74}
+    position: {x: 3.129999, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -1.2807894, y: 0, z: -0.4715952}
+    forward: {x: -1.3006026, y: 0, z: -0.55732834}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.30000001192092896
@@ -3803,8 +3804,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7526486889040500104}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.74743885, z: -0, w: 0.66433066}
-  m_LocalPosition: {x: 1.4999993, y: 0, z: 7}
+  m_LocalRotation: {x: -0, y: -0.75317293, z: -0, w: 0.6578226}
+  m_LocalPosition: {x: 1.5, y: 0, z: 8.400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3843,16 +3844,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: -1.0500007, y: -0.04, z: 6.74}
+    position: {x: 0.1299994, y: -0.04, z: 8.459999}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.00000007947286, y: 0, z: -1}
+    forward: {x: 0.00000007947286, y: 0, z: -1.2}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -3897,9 +3898,9 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 5145901555277392547}
   _result:
-    position: {x: 4.95, y: -0.04, z: 15.74}
+    position: {x: 6.1299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -1.4449017, y: 0, z: -0.17070891}
+    forward: {x: -1.4582818, y: 0, z: -0.19799583}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.10000000149011612
@@ -4013,8 +4014,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.8
+  m_fontSizeBase: 0.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -4114,8 +4115,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8225205569698237126}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.8816746, z: -0, w: -0.47185794}
-  m_LocalPosition: {x: -4.5000014, y: 0, z: 7}
+  m_LocalRotation: {x: -0, y: 0.90130323, z: -0, w: -0.43318874}
+  m_LocalPosition: {x: -4.5000014, y: 0, z: 8.400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4154,16 +4155,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 6.45, y: -0.04, z: 15.74}
+    position: {x: 7.6299996, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
     forward: {x: -1.5, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: -1.0500007, y: -0.04, z: 6.74}
+    position: {x: 0.1299994, y: -0.04, z: 8.459999}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.00000007947286, y: 0, z: -1}
+    forward: {x: 0.00000007947286, y: 0, z: -1.2}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -4208,9 +4209,9 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 9064836498922092048}
   _result:
-    position: {x: -1.0500014, y: -0.04, z: 15.74}
+    position: {x: 0.12999868, y: -0.04, z: 19.26}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -1.0606601, y: 0, z: -0.70710677}
+    forward: {x: -1.0606601, y: 0, z: -0.84852815}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.5
@@ -4256,7 +4257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8247390842078118984}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 3.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4266,7 +4267,7 @@ Transform:
   - {fileID: 2486268512230347248}
   - {fileID: 7256785019463322164}
   m_Father: {fileID: 7560708747464438103}
-  m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -0}
 --- !u!1 &8353670578445407174
 GameObject:
   m_ObjectHideFlags: 0

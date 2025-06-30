@@ -146,6 +146,7 @@ MonoBehaviour:
   isOnQueue: 0
   cardOutline: {fileID: 3681972902591727059}
   lastPosOnQueue: {x: 0, y: 0, z: 0}
+  canPress: 1
 --- !u!114 &5014273233874225281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,9 +220,9 @@ MonoBehaviour:
     applyPosition2D: 1
     retainLocalPosition: 0
     direction: 1
-    applyRotationX: 1
-    applyRotationY: 1
-    applyRotationZ: 1
+    applyRotationX: 0
+    applyRotationY: 0
+    applyRotationZ: 0
     applyRotation2D: 1
     retainLocalRotation: 0
     applyScaleX: 0
@@ -244,7 +245,7 @@ MonoBehaviour:
   _follow: 1
   _startPosition: 0
   preserveUniformSpeedWithOffset: 0
-  _followSpeed: 5
+  _followSpeed: 8
   _followDuration: 1
   _speedModifier:
     blend: 1

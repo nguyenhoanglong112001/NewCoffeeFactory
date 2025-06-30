@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Sequence = DG.Tweening.Sequence;
 
 public class CardHolder : MonoBehaviour
 {
@@ -28,6 +29,10 @@ public class CardHolder : MonoBehaviour
     public Outline[] outlines;
     public bool isFull => cardHolder.Count >= cardCount;
 
+    [Header("packs Vfx")]
+    public GameObject packsVfx;
+    public ParticleSystem[] colorVfx;
+
     private void Start()
     {
         cardCount = cardHolderPos.Count;
@@ -48,6 +53,12 @@ public class CardHolder : MonoBehaviour
        
         CheckToShowHolder();
         SetPacksOutLine(false);
+
+        foreach (var p in colorVfx)
+        {
+            var main = p.main;
+            main.startColor = ColorSetup.GetColor(colorHolder);
+        }
     }
 
     public void CheckHolder()
@@ -62,6 +73,7 @@ public class CardHolder : MonoBehaviour
                 }
             }
             AudioManager.Ins.PlaySound("CompletePack");
+            PlayVfx();
             if(HaveMechanic && currentMechanic == PackMechanic.ChainPack)
             {
                 packMechanic.CheckRemoveRule();
@@ -122,7 +134,7 @@ public class CardHolder : MonoBehaviour
         foreach(var rend in rends)
         {
             Material mat = rend.material;
-            ColorSetup.SetCardColor(colorHolder, mat);
+            ColorSetup.SetMatColor(colorHolder, mat);
         }
     }
 
@@ -143,13 +155,39 @@ public class CardHolder : MonoBehaviour
             return;
         }
         this.gameObject.SetActive(true);
+        AnimateHolder();
     }
 
-    public void SetPacksOutLine(bool isActive)
+    public void SetPacksOutLine(bool isActive,int colorIndex = 0)
     {
         foreach (var ouline in outlines)
         {
             ouline.enabled = isActive;
+            if(isActive == true)
+            {
+                ouline.color = colorIndex;
+            }
         }
+    }
+
+    public void AnimateHolder()
+    {
+        ColorSetup.SetCustomOutlineColor(colorHolder);
+        SetPacksOutLine(true, 2);
+        Vector3 orgScale = this.gameObject.transform.localScale;
+        Sequence s = DOTween.Sequence();
+        s.Append(transform.DOScale(orgScale * 1.2f, 0.2f).SetEase(Ease.OutQuad));
+        s.Append(transform.DOScale(orgScale, 0.2f).SetEase(Ease.OutQuad));
+        s.OnComplete(() =>
+        {
+            SetPacksOutLine(false);
+        });
+    }
+
+    public void PlayVfx()
+    {
+        packsVfx.SetActive(true);
+        ParticleSystem ps = packsVfx.GetComponent<ParticleSystem>();
+        ps.Play();
     }
 }

@@ -3,7 +3,9 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ConveyorManager : MonoBehaviour
@@ -17,6 +19,8 @@ public class ConveyorManager : MonoBehaviour
     public HashSet<List<Card>> cardsHash;
     public List<SplineFollower> cardOnConvey;
 
+    public Vector3 ConveyorOffset;
+
     public int maxCardOnTurn;
 
     public LevelManager levelManager;
@@ -25,8 +29,9 @@ public class ConveyorManager : MonoBehaviour
 
     public TMP_Text capitalText;
 
-    public bool isAllCardMove;
-   
+    //public bool isAllCardMove;
+
+    public float spacingDistance; 
 
     private void Start()
     {
@@ -35,7 +40,6 @@ public class ConveyorManager : MonoBehaviour
         levelManager = LevelManager.Ins;
         OnNumberCardCounter(cardOnConvey.Count, maxCardOnTurn);
         EventManager.OnCapitalChange.AddListener(OnNumberCardCounter);
-        isAllCardMove = false;
     }
     public void SetSpline(SplineFollower follower)
     {
@@ -113,5 +117,43 @@ public class ConveyorManager : MonoBehaviour
                 OnCheckCardHolder(user, group);
             });
         }
+    }
+
+    public void CheckSpacing(SplineFollower nextFollower)
+    {
+        nextFollower.SetDistance(0f);
+
+        if (cardOnConvey.Count <= 1)
+        {
+            nextFollower.enabled = true;
+            return;
+        }
+
+        StartCoroutine(DelayUntilEnoughSpacing(nextFollower));
+    }
+
+    private IEnumerator DelayUntilEnoughSpacing(SplineFollower nextFollower)
+    {
+        nextFollower.enabled = false;
+
+        // Follower đứng trước
+        SplineFollower aboveFollower = cardOnConvey[cardOnConvey.Count - 2];
+
+        // Tính distance từ percent
+        float splineLength = spline.CalculateLength();
+
+        while (true)
+        {
+            float abovePercent = (float)aboveFollower.GetPercent();
+            float aboveDistance = abovePercent * splineLength;
+
+            if (aboveDistance >= spacingDistance)
+                break;
+
+            yield return null;
+        }
+
+        nextFollower.SetDistance(0f);
+        nextFollower.enabled = true;
     }
 }

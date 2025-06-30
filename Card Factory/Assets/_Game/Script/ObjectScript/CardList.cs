@@ -24,7 +24,8 @@ public class CardList : MonoBehaviour
         for (int i = 0; i < numberCard; i++)
         {
             GameManager.Ins.poolManager.cardPool.Prefab = cardPrefab;
-            GameObject card = GameManager.Ins.poolManager.cardPool.Spawn(this.transform.position,cardPrefab.transform.rotation,this.transform);
+            GameObject card = GameManager.Ins.poolManager.cardPool.Spawn(this.transform.position,cardPrefab.transform.rotation);
+            card.gameObject.transform.SetParent(this.transform);
             Card cardObj = card.GetComponent<Card>();
             cards.Add(cardObj);
             cardObj.color = listColor;
