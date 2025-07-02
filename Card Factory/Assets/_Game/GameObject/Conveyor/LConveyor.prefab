@@ -203,6 +203,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 417073621944699029}
+  - {fileID: 1661966003277511761}
   - {fileID: 8717496085248970230}
   - {fileID: 4178648901441543363}
   m_Father: {fileID: 382969219204063726}
@@ -460,14 +461,7 @@ MonoBehaviour:
   _optimizeAngleThreshold: 0.5
   _space: 1
   _sampleMode: 0
-  _subscribers:
-  - {fileID: 5069139700399113768}
-  - {fileID: 6541254655116660052}
-  - {fileID: 1716186243349723477}
-  - {fileID: 5411110815984481811}
-  - {fileID: 8645917343307908991}
-  - {fileID: 819521468383121796}
-  - {fileID: 5029973619652804241}
+  _subscribers: []
   _rawSamples:
   - position: {x: -5.000001, y: 0, z: 1}
     up: {x: 0, y: 1, z: 0}
@@ -600,9 +594,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2704022592356074857}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9081432, z: -0, w: 0.41865975}
-  m_LocalPosition: {x: -4.8450007, y: 0, z: -1}
-  m_LocalScale: {x: 1.3, y: 1, z: 1.5}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.000000004257449}
+  m_LocalPosition: {x: -6.2700014, y: 0, z: -0.012963057}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7380973695762169585}
@@ -621,7 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateMethod: 0
-  _spline: {fileID: 4578095157622208530}
+  _spline: {fileID: 4235388554640343690}
   _autoUpdate: 1
   _rotationModifier:
     blend: 1
@@ -642,14 +636,14 @@ MonoBehaviour:
   _clipFromSample:
     position: {x: -4.050001, y: 3.22, z: 1.5}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: -1.5}
+    forward: {x: 0, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
     position: {x: 10.2, y: 3.22, z: -3}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.5, y: 0, z: 0}
+    forward: {x: 0, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -694,17 +688,17 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 3280899412715845627}
   _result:
-    position: {x: -2.6250007, y: 3.22, z: -3}
+    position: {x: -4.050001, y: 3.22, z: -2.012963}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.1406089, y: 0, z: -0.974172}
+    forward: {x: -0.000000012772347, y: 0, z: -1.5}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.550000011920929
+    percent: 0.3499999940395355
   wrapMode: 1
   followMode: 0
   autoStartPosition: 0
   _follow: 1
-  _startPosition: 0.550000011920929
+  _startPosition: 0.3499999940395355
   preserveUniformSpeedWithOffset: 0
   _followSpeed: 8
   _followDuration: 1
@@ -1014,9 +1008,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3908254887812316778}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.8314696, z: -0, w: 0.55557036}
-  m_LocalPosition: {x: 0.8549993, y: 0, z: -1}
-  m_LocalScale: {x: 1.3, y: 1, z: 1.5}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -3.144384, y: 0, z: -0.99999976}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3637179631654176917}
@@ -1035,7 +1029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateMethod: 0
-  _spline: {fileID: 4578095157622208530}
+  _spline: {fileID: 4235388554640343690}
   _autoUpdate: 1
   _rotationModifier:
     blend: 1
@@ -1056,14 +1050,14 @@ MonoBehaviour:
   _clipFromSample:
     position: {x: -4.050001, y: 3.22, z: 1.5}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: -1.5}
+    forward: {x: 0, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
     position: {x: 10.2, y: 3.22, z: -3}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.5, y: 0, z: 0}
+    forward: {x: 0, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -1108,17 +1102,17 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 2115037932386060755}
   _result:
-    position: {x: 3.0749993, y: 3.22, z: -3}
+    position: {x: -0.924384, y: 3.22, z: -2.9999998}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.3858192, y: 0, z: -0.5740251}
+    forward: {x: 1.5, y: 0, z: 0.000000007663455}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.75
+    percent: 0.6499999761581421
   wrapMode: 1
   followMode: 0
   autoStartPosition: 0
   _follow: 1
-  _startPosition: 0.75
+  _startPosition: 0.6499999761581421
   preserveUniformSpeedWithOffset: 0
   _followSpeed: 8
   _followDuration: 1
@@ -1245,9 +1239,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4089737265825266339}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.78531694, z: -0, w: 0.61909395}
-  m_LocalPosition: {x: 3.7050002, y: 0, z: -1}
-  m_LocalScale: {x: 1.3, y: 1, z: 1.5}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.8549993, y: 0, z: -1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1212631957434402232}
@@ -1266,7 +1260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateMethod: 0
-  _spline: {fileID: 4578095157622208530}
+  _spline: {fileID: 4235388554640343690}
   _autoUpdate: 1
   _rotationModifier:
     blend: 1
@@ -1287,14 +1281,14 @@ MonoBehaviour:
   _clipFromSample:
     position: {x: -4.050001, y: 3.22, z: 1.5}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: -1.5}
+    forward: {x: 0, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
     position: {x: 10.2, y: 3.22, z: -3}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.5, y: 0, z: 0}
+    forward: {x: 0, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -1339,17 +1333,17 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 7647156831688147116}
   _result:
-    position: {x: 5.925, y: 3.22, z: -3}
+    position: {x: 3.0749993, y: 3.22, z: -3}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.4585549, y: 0, z: -0.35016787}
+    forward: {x: 1.5, y: 0, z: 0.000000019057799}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.8500000238418579
+    percent: 0.75
   wrapMode: 1
   followMode: 0
   autoStartPosition: 0
   _follow: 1
-  _startPosition: 0.8500000238418579
+  _startPosition: 0.75
   preserveUniformSpeedWithOffset: 0
   _followSpeed: 8
   _followDuration: 1
@@ -1572,6 +1566,7 @@ MonoBehaviour:
   followerSpacing: 0
   capitalText: {fileID: 5563980906481372428}
   spacingDistance: 2.2
+  boosterTargetPos: {fileID: 6588016431131855707}
 --- !u!1 &4389672655263974363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1603,149 +1598,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7560708747464438103}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
---- !u!1 &4444415719243531083
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3290396208446612539}
-  - component: {fileID: 5069139700399113768}
-  m_Layer: 0
-  m_Name: ConveyorArrow(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3290396208446612539
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4444415719243531083}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -6.2700014, y: 0, z: 3.5}
-  m_LocalScale: {x: 1.3, y: 1, z: 1.5}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5243029495114238842}
-  m_Father: {fileID: 563042547192891907}
-  m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
---- !u!114 &5069139700399113768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4444415719243531083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ddc1a2536715a24095c464a2c394d5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateMethod: 0
-  _spline: {fileID: 4578095157622208530}
-  _autoUpdate: 1
-  _rotationModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _offsetModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _colorModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _sizeModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _clipFromSample:
-    position: {x: -4.050001, y: 3.22, z: 1.5}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: -1.5}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0
-  _clipToSample:
-    position: {x: 10.2, y: 3.22, z: -3}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.5, y: 0, z: 0}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 1
-  _loopSamples: 0
-  _clipFrom: 0
-  _clipTo: 1
-  animClipFrom: 0
-  animClipTo: 1
-  multithreaded: 0
-  buildOnAwake: 1
-  buildOnEnable: 0
-  applyDirectionRotation: 1
-  useTriggers: 0
-  triggerGroup: 0
-  _direction: 1
-  _dontLerpDirection: 0
-  _physicsMode: 0
-  _motion:
-    _hasOffset: 0
-    _hasRotationOffset: 0
-    _offset: {x: 0, y: 0}
-    _rotationOffset: {x: 0, y: 0, z: 0}
-    _baseScale: {x: 1, y: 1, z: 1}
-    _2dMode: 0
-    velocityHandleMode: 0
-    applyPositionX: 1
-    applyPositionY: 1
-    applyPositionZ: 1
-    applyPosition2D: 1
-    retainLocalPosition: 0
-    direction: 1
-    applyRotationX: 1
-    applyRotationY: 1
-    applyRotationZ: 1
-    applyRotation2D: 1
-    retainLocalRotation: 0
-    applyScaleX: 0
-    applyScaleY: 0
-    applyScaleZ: 0
-    targetUser: {fileID: 5069139700399113768}
-  targetRigidbody: {fileID: 0}
-  targetRigidbody2D: {fileID: 0}
-  targetTransform: {fileID: 3290396208446612539}
-  _result:
-    position: {x: -4.050001, y: 3.22, z: 1.5}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: -1.5}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0
-  wrapMode: 1
-  followMode: 0
-  autoStartPosition: 0
-  _follow: 1
-  _startPosition: 0
-  preserveUniformSpeedWithOffset: 0
-  _followSpeed: 8
-  _followDuration: 1
-  _speedModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _unityOnEndReached:
-    m_PersistentCalls:
-      m_Calls: []
-  _unityOnBeginningReached:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &4539327186243554126
 GameObject:
   m_ObjectHideFlags: 0
@@ -2583,9 +2435,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6026966301072339262}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9723699, z: -0, w: 0.2334454}
-  m_LocalPosition: {x: -6.2700014, y: 0, z: 0.79999995}
-  m_LocalScale: {x: 1.3, y: 1, z: 1.5}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000001700329}
+  m_LocalPosition: {x: -6.2700014, y: 0, z: 3.0148149}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1689326962326093244}
@@ -2604,7 +2456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateMethod: 0
-  _spline: {fileID: 4578095157622208530}
+  _spline: {fileID: 4235388554640343690}
   _autoUpdate: 1
   _rotationModifier:
     blend: 1
@@ -2625,14 +2477,14 @@ MonoBehaviour:
   _clipFromSample:
     position: {x: -4.050001, y: 3.22, z: 1.5}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: -1.5}
+    forward: {x: 0, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
     position: {x: 10.2, y: 3.22, z: -3}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.5, y: 0, z: 0}
+    forward: {x: 0, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -2677,17 +2529,17 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 680335728911017954}
   _result:
-    position: {x: -4.050001, y: 3.22, z: -1.2}
+    position: {x: -4.050001, y: 3.22, z: 1.014815}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.68098587, y: 0, z: -1.3365097}
+    forward: {x: -0.00000005100987, y: 0, z: -1.5}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.30000001192092896
+    percent: 0.10000000149011612
   wrapMode: 1
   followMode: 0
   autoStartPosition: 0
   _follow: 1
-  _startPosition: 0.30000001192092896
+  _startPosition: 0.10000000149011612
   preserveUniformSpeedWithOffset: 0
   _followSpeed: 8
   _followDuration: 1
@@ -2787,7 +2639,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &6123500959336860789
+--- !u!1 &6400892527905971676
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2795,85 +2647,225 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5243029495114238842}
-  - component: {fileID: 541786354101879152}
+  - component: {fileID: 1661966003277511761}
+  - component: {fileID: 4235388554640343690}
   m_Layer: 0
-  m_Name: ArrowSprite
+  m_Name: ArrowSpline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5243029495114238842
+--- !u!4 &1661966003277511761
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6123500959336860789}
+  m_GameObject: {fileID: 6400892527905971676}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.70710677, y: 0.0000010579824, z: -0.0000009536743, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 0.2428903, y: 0.2428903, z: 0.2428903}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3290396208446612539}
-  m_LocalEulerAnglesHint: {x: 90, y: -0.00016300147, z: -0.0000084519215}
---- !u!212 &541786354101879152
-SpriteRenderer:
+  m_Father: {fileID: 1133595164454062211}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4235388554640343690
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6123500959336860789}
+  m_GameObject: {fileID: 6400892527905971676}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: de689e622091e174894377855b049b90, type: 2}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.29411766}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598e68924c9f6324bbfd049d3bae754c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  editorDrawPivot: 1
+  editorPathColor: {r: 1, g: 1, b: 1, a: 1}
+  editorAlwaysDraw: 0
+  editorDrawThickness: 0
+  editorBillboardThickness: 1
+  isNewlyCreated: 0
+  editorUpdateMode: 0
+  multithreaded: 0
+  updateMode: 0
+  triggerGroups:
+  - open: 0
+    enabled: 1
+    name: Trigger Group 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    triggers: []
+  _spline:
+    points:
+    - _type: 0
+      position: {x: -5.000001, y: 0, z: 1}
+      color: {r: 1, g: 1, b: 1, a: 1}
+      normal: {x: 0, y: 1, z: 0}
+      size: 1
+      tangent: {x: -5.000001, y: 0, z: 1}
+      tangent2: {x: -5.000001, y: 0, z: 1}
+    - _type: 0
+      position: {x: -5.000001, y: 0, z: -2}
+      color: {r: 1, g: 1, b: 1, a: 1}
+      normal: {x: 0, y: 1, z: 0}
+      size: 1
+      tangent: {x: -5.000001, y: 0, z: -2}
+      tangent2: {x: -5.000001, y: 0, z: -2}
+    - _type: 0
+      position: {x: 4.5, y: 0, z: -2}
+      color: {r: 1, g: 1, b: 1, a: 1}
+      normal: {x: 0, y: 1, z: 0}
+      size: 1
+      tangent: {x: 4.5, y: 0, z: -2}
+      tangent2: {x: 4.5, y: 0, z: -2}
+    type: 2
+    linearAverageDirection: 1
+    customValueInterpolation:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customNormalInterpolation:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    sampleRate: 10
+    closed: 0
+    _knotParametrization: 1
+  _originalSamplePercents: []
+  _is2D: 0
+  hasSamples: 1
+  _optimizeAngleThreshold: 0.5
+  _space: 1
+  _sampleMode: 0
+  _subscribers:
+  - {fileID: 6541254655116660052}
+  - {fileID: 1716186243349723477}
+  - {fileID: 8645917343307908991}
+  - {fileID: 819521468383121796}
+  - {fileID: 5029973619652804241}
+  _rawSamples:
+  - position: {x: -5.000001, y: 0, z: 1}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0
+  - position: {x: -5.000001, y: 0, z: 0.89711934}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: -0.000000016763808, y: 0, z: -1}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.05555555555555555
+  - position: {x: -5.000001, y: 0, z: 0.6213993}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: -0.00000003831727, y: 0, z: -1}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.1111111111111111
+  - position: {x: -5.0000005, y: 0, z: 0.22222212}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: -0.0000001192093, y: 0, z: -1}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.16666666666666666
+  - position: {x: -5.0000014, y: 0, z: -0.25102878}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 0, y: 0, z: -1}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.2222222222222222
+  - position: {x: -5.000001, y: 0, z: -0.74897134}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 0, y: 0, z: -1}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.2777777777777778
+  - position: {x: -5.000001, y: 0, z: -1.2222223}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 0.0000001192093, y: 0, z: -1}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.3333333333333333
+  - position: {x: -5.000001, y: 0, z: -1.6213992}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: -0.00000030653817, y: 0, z: -1}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.3888888888888889
+  - position: {x: -5.000001, y: 0, z: -1.8971193}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 0, y: 0, z: -1}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.4444444444444444
+  - position: {x: -5.000001, y: 0, z: -2}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.5
+  - position: {x: -4.6742125, y: 0, z: -2}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 1, y: 0, z: -0.000000007940749}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.5555555555555556
+  - position: {x: -3.8010983, y: 0, z: -2.0000002}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 1, y: 0, z: 0.0000000060500946}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.6111111111111112
+  - position: {x: -2.5370371, y: 0, z: -1.9999998}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 1, y: 0, z: 0.0000000047056297}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.6666666666666666
+  - position: {x: -1.0384097, y: 0, z: -2}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 1, y: 0, z: 0.000000016940264}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.7222222222222222
+  - position: {x: 0.5384088, y: 0, z: -2}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 1, y: 0, z: 0.000000008470133}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.7777777777777778
+  - position: {x: 2.037037, y: 0, z: -2}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 1, y: 0, z: -0.000000018822519}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.8333333333333334
+  - position: {x: 3.3010974, y: 0, z: -2}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 1, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.8888888888888888
+  - position: {x: 4.1742115, y: 0, z: -2}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 1, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.9444444444444444
+  - position: {x: 4.5, y: 0, z: -2}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 0, y: 0, z: 0}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 1
+  _nodes: []
 --- !u!1 &6855292086050001373
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,93 +2948,6 @@ SpriteRenderer:
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.28, y: 1.28}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!1 &7168296476996695201
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3351993607864447040}
-  - component: {fileID: 743102293264616718}
-  m_Layer: 0
-  m_Name: ArrowSprite
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3351993607864447040
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7168296476996695201}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.70710677, y: 0.0000010579824, z: -0.0000009536743, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 0.2428903, y: 0.2428903, z: 0.2428903}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2286388216299356356}
-  m_LocalEulerAnglesHint: {x: 90, y: -0.00016300147, z: -0.0000084519215}
---- !u!212 &743102293264616718
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7168296476996695201}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: de689e622091e174894377855b049b90, type: 2}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.29411766}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3277,9 +3182,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7726686350430972625}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.73432255, z: -0, w: 0.67880076}
-  m_LocalPosition: {x: 6.5549994, y: 0, z: -1}
-  m_LocalScale: {x: 1.3, y: 1, z: 1.5}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 4.8543835, y: 0, z: -1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2134742043873250439}
@@ -3298,7 +3203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateMethod: 0
-  _spline: {fileID: 4578095157622208530}
+  _spline: {fileID: 4235388554640343690}
   _autoUpdate: 1
   _rotationModifier:
     blend: 1
@@ -3319,14 +3224,14 @@ MonoBehaviour:
   _clipFromSample:
     position: {x: -4.050001, y: 3.22, z: 1.5}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: -1.5}
+    forward: {x: 0, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
     position: {x: 10.2, y: 3.22, z: -3}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.5, y: 0, z: 0}
+    forward: {x: 0, y: 0, z: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -3371,17 +3276,17 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 1120925099833707950}
   _result:
-    position: {x: 8.775, y: 3.22, z: -3}
+    position: {x: 7.0743833, y: 3.22, z: -3}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.4953761, y: 0, z: -0.11768858}
+    forward: {x: 1.5, y: 0, z: -0.000000019763633}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.949999988079071
+    percent: 0.8500000238418579
   wrapMode: 1
   followMode: 0
   autoStartPosition: 0
   _follow: 1
-  _startPosition: 0.949999988079071
+  _startPosition: 0.8500000238418579
   preserveUniformSpeedWithOffset: 0
   _followSpeed: 8
   _followDuration: 1
@@ -3556,149 +3461,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &8446123898499059918
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2286388216299356356}
-  - component: {fileID: 5411110815984481811}
-  m_Layer: 0
-  m_Name: ConveyorArrow(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2286388216299356356
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8446123898499059918}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.872496, z: -0, w: 0.4886212}
-  m_LocalPosition: {x: -1.9950016, y: 0, z: -1}
-  m_LocalScale: {x: 1.3, y: 1, z: 1.5}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3351993607864447040}
-  m_Father: {fileID: 563042547192891907}
-  m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
---- !u!114 &5411110815984481811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8446123898499059918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ddc1a2536715a24095c464a2c394d5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateMethod: 0
-  _spline: {fileID: 4578095157622208530}
-  _autoUpdate: 1
-  _rotationModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _offsetModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _colorModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _sizeModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _clipFromSample:
-    position: {x: -4.050001, y: 3.22, z: 1.5}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 0, y: 0, z: -1.5}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0
-  _clipToSample:
-    position: {x: 10.2, y: 3.22, z: -3}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.5, y: 0, z: 0}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 1
-  _loopSamples: 0
-  _clipFrom: 0
-  _clipTo: 1
-  animClipFrom: 0
-  animClipTo: 1
-  multithreaded: 0
-  buildOnAwake: 1
-  buildOnEnable: 0
-  applyDirectionRotation: 1
-  useTriggers: 0
-  triggerGroup: 0
-  _direction: 1
-  _dontLerpDirection: 0
-  _physicsMode: 0
-  _motion:
-    _hasOffset: 0
-    _hasRotationOffset: 0
-    _offset: {x: 0, y: 0}
-    _rotationOffset: {x: 0, y: 0, z: 0}
-    _baseScale: {x: 1, y: 1, z: 1}
-    _2dMode: 0
-    velocityHandleMode: 0
-    applyPositionX: 1
-    applyPositionY: 1
-    applyPositionZ: 1
-    applyPosition2D: 1
-    retainLocalPosition: 0
-    direction: 1
-    applyRotationX: 1
-    applyRotationY: 1
-    applyRotationZ: 1
-    applyRotation2D: 1
-    retainLocalRotation: 0
-    applyScaleX: 0
-    applyScaleY: 0
-    applyScaleZ: 0
-    targetUser: {fileID: 5411110815984481811}
-  targetRigidbody: {fileID: 0}
-  targetRigidbody2D: {fileID: 0}
-  targetTransform: {fileID: 2286388216299356356}
-  _result:
-    position: {x: 0.22499846, y: 3.22, z: -3}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 1.2789603, y: 0, z: -0.7837478}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0.6499999761581421
-  wrapMode: 1
-  followMode: 0
-  autoStartPosition: 0
-  _follow: 1
-  _startPosition: 0.6499999761581421
-  preserveUniformSpeedWithOffset: 0
-  _followSpeed: 8
-  _followDuration: 1
-  _speedModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _unityOnEndReached:
-    m_PersistentCalls:
-      m_Calls: []
-  _unityOnBeginningReached:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8638960135455443014
 GameObject:
   m_ObjectHideFlags: 0
@@ -3728,10 +3490,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3290396208446612539}
   - {fileID: 680335728911017954}
   - {fileID: 3280899412715845627}
-  - {fileID: 2286388216299356356}
   - {fileID: 2115037932386060755}
   - {fileID: 7647156831688147116}
   - {fileID: 1120925099833707950}

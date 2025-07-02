@@ -49,7 +49,7 @@ public class FeatureUIView : MonoBehaviour
     {
         OnShowPopUp(featureUnlockUI, true);
         featureNextButton.onClick.AddListener(UIManager.Ins.OnContinuePress);
-        float progress = GameManager.Ins.GetFeatureProgress(GameManager.Ins.currentLevel - 1);
+        float progress = GameManager.Ins.GetFeatureProgress(GameManager.Ins.currentLevel -1);
         float currentProgress = GameManager.Ins.GetFeatureProgress(GameManager.Ins.currentLevel - 2);
         if (progress >= 1)
         {
@@ -95,12 +95,14 @@ public class FeatureUIView : MonoBehaviour
             {
                 featureIcon.SetActive(true);
                 featureIcon.transform.localScale = Vector3.zero;
+                featureIcon.GetComponent<Image>().sprite = GameManager.Ins.currentFeatureUnlock.featureIcon;
                 featureIcon.transform.DOScale(Vector3.one, 0.3f)
                 .SetUpdate(true)
                 .OnComplete(() =>
                 {
                     featureNextButton.onClick.AddListener(UIManager.Ins.OnContinuePress);
                     descriptionText.text = GameManager.Ins.currentFeatureUnlock.description;
+                    GameManager.Ins.NextFeature();
                 });
             });
     }

@@ -1,3 +1,4 @@
+using ColorBlockJam;
 using DG.Tweening;
 using Dreamteck;
 using MoreMountains.Feedbacks;
@@ -5,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using Random = System.Random;
 
@@ -34,7 +36,8 @@ public class BoosterManager : MonoBehaviour
     public Dictionary<BoosterType,MMF_Player> mmfLock;
 
     public GameObject hammmer;
-    public GameObject hammerSmashVfx;
+    public GameObject starVfx;
+    public GameObject addQueuePopUp;
 
     public MMF_Player addConveyLock;
     public MMF_Player swapConveyLock;
@@ -149,19 +152,13 @@ public class BoosterManager : MonoBehaviour
                     }
                 });
             }
-        }    
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(targetPos.position);
-
-        Vector2 uiPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            UIManager.Ins.mainCanvas.GetComponent<RectTransform>(),
-            screenPos,
-            UIManager.Ins.mainCanvas.GetComponentInParent<Canvas>().worldCamera,
-            out uiPos
-        );
-        Debug.Log(uiPos);
+        }
+        RectTransform mainCanvas = UIManager.Ins.mainCanvas.GetComponent<RectTransform>();
+        Vector3 uiPos = Help.ConvertWorldToUIPosition(targetPos.position, mainCanvas);
         UIManager.Ins.OnShowAddConveyPopUp(addConveyBt, uiPos, () =>
         {
+            GameManager.Ins.poolManager.vfxPool.Prefab = starVfx;
+            GameObject vfx = GameManager.Ins.poolManager.vfxPool.Spawn(targetPos.position, starVfx.transform.rotation, GameManager.Ins.poolManager.poolPopup.transform);
             GameManager.Ins.ConveyorManager.AddMaxCardOnConvey(NumberAdd);
             OnSaveBoosterCount(-1);
             currentBooster = BoosterType.None;
@@ -189,14 +186,20 @@ public class BoosterManager : MonoBehaviour
     {
         CardColor holderColor = holder.colorHolder;
         GameManager.Ins.poolManager.objectPool.Prefab = hammmer;
-        GameObject hammerBooster = GameManager.Ins.poolManager.objectPool.Spawn(holder.transform.position, hammmer.transform.rotation, GameManager.Ins.poolManager.objectPool.transform);
+        Vector3 hammerPosSpawn = Help.ConvertUIToWorldPosition(UIManager.Ins.removePack.GetComponent<RectTransform>());
+        GameObject hammerBooster = GameManager.Ins.poolManager.objectPool.Spawn(hammerPosSpawn, hammmer.transform.rotation, GameManager.Ins.poolManager.objectPool.transform);
         Animator hammeranim = hammerBooster.GetComponent<Animator>();
+        hammerBooster.transform.DOMove(holder.transform.position, 0.5f)
+            .OnComplete(() =>
+            {
+                hammeranim.SetTrigger("Hit");
+            });
         int destroyCount = 6 - holder.cardHolder.Count;
         UIManager.Ins.OnShowBoosterNotice(false);
         StartCoroutine(WaitForAnimationEnd(hammeranim, "HammerSmash" , () =>
         {
-            GameManager.Ins.poolManager.vfxPool.Prefab = hammerSmashVfx;
-            GameObject vfx = GameManager.Ins.poolManager.vfxPool.Spawn(holder.transform.position, hammerSmashVfx.transform.rotation, GameManager.Ins.poolManager.poolPopup.transform);
+            GameManager.Ins.poolManager.vfxPool.Prefab = starVfx;
+            GameObject vfx = GameManager.Ins.poolManager.vfxPool.Spawn(holder.transform.position, starVfx.transform.rotation, GameManager.Ins.poolManager.poolPopup.transform);
             List<Card> cards = LevelManager.Ins.cards.ToList();
             for (int i = cards.Count - 1; i >= 0; i--)
             {
@@ -211,8 +214,8 @@ public class BoosterManager : MonoBehaviour
                 }
             }
             holder.transform.DOScale(Vector3.zero, 0.3f)
-        .OnComplete(() =>
-        {
+            .OnComplete(() =>
+            {
             foreach (var holdergroup in LevelManager.Ins.holderGroups)
             {
                 Collider holderCollider = holdergroup.cardHolders[0].GetComponent<Collider>();
@@ -253,6 +256,13 @@ public class BoosterManager : MonoBehaviour
 
     public void OnUseSwapBooster()
     {
+        foreach (var tile in LevelManager.Ins.queues)
+        {
+            foreach (var card in tile.cards)
+            {
+                card.canPress = false;
+            }
+        }
         Sequence gatherTween = DOTween.Sequence();
         currentBooster = BoosterType.Swap;
         OnSaveBoosterCount(-1);
@@ -260,13 +270,12 @@ public class BoosterManager : MonoBehaviour
         Dictionary<CardQueue,int> currentQueueCount = new Dictionary<CardQueue,int>();
         foreach (var queue in LevelManager.Ins.queues)
         {
-            queue.cardPos.Clear();
-            currentQueueCount[queue] = queue.cardLists.Count;
-            cardGroups.AddRange(queue.cardLists);
             queue.cards.Clear();
+            currentQueueCount[queue] = queue.cardLists.Count;
             foreach (var cardGroup in queue.cardLists.ToList())
             {
                 if (cardGroup.HaveMechanic) continue;
+                cardGroups.Add(cardGroup);
                 if (cardGroup.queue != null) 
                 {
                     int index = cardGroup.queue.cardLists.IndexOf(cardGroup);
@@ -297,20 +306,43 @@ public class BoosterManager : MonoBehaviour
             {
                 if (queue.cardLists[i] != null) continue;
                 queue.cardLists[i] = cardGroups[0];
-                queue.cards.AddRange(cardGroups[0].cards);
                 cardGroups[0].transform.SetParent(queue.transParent);
                 cardGroups[0].transform.localPosition = Vector3.zero;
                 cardGroups[0].queue = queue;
+                foreach (var card in cardGroups[0].cards)
+                {
+                    card.cardQueue = queue;
+                }
                 cardGroups.RemoveAt(0);
             }
-            queue.SetCardPosition();
-            for (int i = 0; i<queue.cardPos.Count; i++)
+            foreach (var card in queue.cardLists)
+            {
+                queue.cards.AddRange(card.cards);
+            }
+            int cardCount = queue.cards.Count;
+            int posCount = queue.cardPos.Count;
+            if (cardCount > posCount)
+            {
+                for (int i = 0;i< cardCount - posCount; i++)
+                {
+                    Vector3 newPos = queue.cardPos[queue.cardPos.Count - 1] + new Vector3(1, 0, 0);
+                    queue.cardPos.Add(newPos);
+                }
+            }
+            for (int i = 0; i<queue.cards.Count; i++)
             {
                 moveToPos.Join(queue.cards[i].transform.DOLocalMove(queue.cardPos[i], 0.3f));
             }
         }
         moveToPos.OnComplete(() =>
         {
+            foreach (var tile in LevelManager.Ins.queues)
+            {
+                foreach (var card in tile.cards)
+                {
+                    card.canPress = true;
+                }
+            }
             currentBooster = BoosterType.None;
         });
     }
@@ -348,6 +380,8 @@ public class BoosterManager : MonoBehaviour
             }
             GameManager.Ins.OnUpdateCoin(-config.GetBoosterByType(BoosterType.AddQueueSlot).boosterCost);
         }
+        addQueuePopUp.SetActive(true);
+        StartCoroutine(HandlePopUpAnim(addQueuePopUp.GetComponent<Animator>(), "Textspawn", () => addQueuePopUp.SetActive(false)));
         int firstRowIndex = GameManager.Ins.QueueManager.avaliableQueues.Count / 2;
         for(int i = 0; i < NumberSlotAdd; i++)
         {
@@ -369,17 +403,21 @@ public class BoosterManager : MonoBehaviour
             }
         }
         EventManager.OnQueueCountChange.Invoke();
-        queueCover.DOLocalMove(new Vector3(queueCover.localPosition.x - 1.3f * (NumberSlotAdd / 2), queueCover.localPosition.y, queueCover.localPosition.z), 0.1f)
+        queueCover.DOLocalMove(new Vector3(queueCover.localPosition.x - 1.45f * (NumberSlotAdd / 2), queueCover.localPosition.y, queueCover.localPosition.z), 0.1f)
             .OnComplete(() =>
             {
-                GameManager.Ins.QueueManager.ReOrderQueue((index, card) =>
-                {
-                    if (card == null) return;
-                    card.currentQueueSlot?.SetCardOnQueue(null);
-                    card.currentQueueSlot = GameManager.Ins.QueueManager.avaliableQueues[index];
-                    GameManager.Ins.QueueManager.avaliableQueues[index].SetCardOnQueue(card);
-                });
+                GameManager.Ins.QueueManager.ReOrderQueue();
             });
+    }
+
+    IEnumerator HandlePopUpAnim(Animator animator,string stateName,Action callback)
+    {
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName(stateName))
+            yield return null;
+
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            yield return null;
+        callback?.Invoke();
     }
 
     public bool CheckForTutBooster(BoosterType type)

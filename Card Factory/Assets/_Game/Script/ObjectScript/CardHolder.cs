@@ -24,7 +24,6 @@ public class CardHolder : MonoBehaviour
     public Animator animator;
     public Animation packAnimation;
     public string doneStateName = "Done";
-    public string packHintClipName = "PackHint";
 
     public Outline[] outlines;
     public bool isFull => cardHolder.Count >= cardCount;
@@ -111,10 +110,10 @@ public class CardHolder : MonoBehaviour
 
     private void PlayAnimation()
     {
-        StartCoroutine(HandleHammerAnim(animator));
+        StartCoroutine(HandlePackAnim(animator));
     }
 
-    public IEnumerator HandleHammerAnim(Animator animator)
+    public IEnumerator HandlePackAnim(Animator animator)
     {
         AnimationClip animclip = animator.runtimeAnimatorController.animationClips.First(c => c.name == "Inboxes");
         yield return new WaitForSeconds(animclip.length);
@@ -162,6 +161,7 @@ public class CardHolder : MonoBehaviour
     {
         foreach (var ouline in outlines)
         {
+            if (ouline == null) continue;
             ouline.enabled = isActive;
             if(isActive == true)
             {

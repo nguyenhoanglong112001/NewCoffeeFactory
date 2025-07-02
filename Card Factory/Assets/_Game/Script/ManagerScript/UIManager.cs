@@ -280,7 +280,7 @@ public class UIManager : Singleton<UIManager>
     {
         ui.SetActive(false);
     }
-    public void OnShowAddConveyPopUp(RectTransform posSpawn, Vector2 uiTargetPos, Action onComplete)
+    public void OnShowAddConveyPopUp(RectTransform posSpawn, Vector3 uiTargetPos, Action onComplete)
     {
         GameManager.Ins.poolManager.poolPopup.Prefab = addConveyPopUp;
         GameObject popUp = GameManager.Ins.poolManager.poolPopup.Spawn(
@@ -307,8 +307,7 @@ public class UIManager : Singleton<UIManager>
 
         popupRect.anchoredPosition = spawnAnchoredPos;
         popupRect.localPosition = new Vector3(popupRect.localPosition.x, popupRect.localPosition.y, 0);
-        popupRect.DOAnchorPos(uiTargetPos, 2f)
-            .SetEase(Ease.OutBack)
+        popupRect.DOAnchorPos(uiTargetPos, 1f)
             .OnComplete(() =>
             {
                 GameManager.Ins.poolManager.poolPopup.Despawn(popUp);
@@ -351,6 +350,7 @@ public class UIManager : Singleton<UIManager>
             Collider holderCollider = holdergroup.cardHolders[0].GetComponent<Collider>();
             holdergroup.cardHolders[0].transform.DOKill();
             holdergroup.cardHolders[0].transform.localPosition = holdergroup.holderPos[0];
+            holdergroup.cardHolders[0].SetPacksOutLine(false);
             holderCollider.enabled = false;
         }
     }

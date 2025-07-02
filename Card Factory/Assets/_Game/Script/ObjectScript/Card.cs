@@ -91,6 +91,7 @@ public class Card : MonoBehaviour
                 return;
             }
         }
+        //conveyorManager.OnAddFollower(follower);
         EnableCardOutLine(true);
         if (GameManager.Ins.isFirstTime && TutorialInGameManager.Ins.isOnTutorial)
         {
@@ -121,6 +122,10 @@ public class Card : MonoBehaviour
         foreach (var card in cardSame)
         {
             card.cardOutline.enabled = false;
+        }
+        if (conveyorManager.isFullConvey(cardSame))
+        {
+            return;
         }
         if (GameManager.Ins.isPause) return;
         OnCardPress();
@@ -232,7 +237,7 @@ public class Card : MonoBehaviour
                 cardMove = moveList;
             }
         }
-        if(!conveyorManager.cardsHash.Contains(cardMove))
+        if (!conveyorManager.cardsHash.Contains(cardMove))
         {
             conveyorManager.cardsHash.Add(cardMove);
             queueManager.CheckColorEnterQueue(cardMove);
@@ -300,6 +305,7 @@ public class Card : MonoBehaviour
         });
     }
 
+
     private IEnumerator CardSameMoveToConvey(List<Card> cardsSameColor, Action oncomplete = null)
     {
         int completeCount = 0;
@@ -327,13 +333,7 @@ public class Card : MonoBehaviour
                 queueManager.cardInQueue.RemoveAll(x => cardSame.Contains(x));
                 List<Card?> newValues = Enumerable.Repeat<Card?>(null,cardSame.Count).ToList();
                 queueManager.cardInQueue.AddRange(newValues);
-                queueManager.ReOrderQueue((index, card) =>
-                {
-                    if (card == null) return;
-                    card.currentQueueSlot?.SetCardOnQueue(null);
-                    card.currentQueueSlot = queueManager.avaliableQueues[index];
-                    queueManager.avaliableQueues[index].SetCardOnQueue(card);
-                });
+                queueManager.ReOrderQueue();
             }
 
             float delayForFollower = i * spacingDelay;
@@ -437,11 +437,15 @@ public class Card : MonoBehaviour
     Transform holderPos;
     public void MoveToHolder(CardHolderGroup holder)
     {
+                CardHolder cupsHolder = holder.cardHolders[0];
+        if (cupsHolder.isFull)
+        {
+            cupsHolder = holder.cardHolders[1];
+        }
         if (holder.cardHolders[0].colorHolder != color) return;
         if (holder.cardHolders[0].isFull) return;
         AudioManager.Ins.PlaySound("CardSound");
         Sequence moveToHolder = DOTween.Sequence();
-        CardHolder cupsHolder = holder.cardHolders[0];
         foreach (var holdercard in cupsHolder.cardHolderPos)
         {
             if(holdercard.childCount <= 0)
@@ -471,6 +475,7 @@ public class Card : MonoBehaviour
             CheckList();
             holder.cardHolders[0].cardHolder.Add(this);
             holder.cardHolders[0].CheckHolder();
+            this.transform.localScale = Vector3.one;
         });
     }
 

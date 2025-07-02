@@ -204,9 +204,9 @@ public class LevelManager : Singleton<LevelManager>
         if (conveyPrefab != null)
         {
             GameObject conveyor = Instantiate(conveyPrefab, conveySpawnPos.position, conveyPrefab.transform.rotation, conveySpawnPos);
-            GameManager.Ins.BoosterManager.targetPos = conveyor.transform;
             conveyor.transform.position += level.ConveyorPrefab.ConveyorOffset;
             ConveyorManager conveyorManager = conveyor.GetComponent<ConveyorManager>();
+            GameManager.Ins.BoosterManager.targetPos = conveyorManager.boosterTargetPos;
             GameManager.Ins.ConveyorManager = conveyorManager;
             splineCom = conveyorManager.spline;
             for (int i = 0; i < level.HolderPoints.Length; i++)

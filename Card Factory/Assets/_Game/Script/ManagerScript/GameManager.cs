@@ -147,14 +147,11 @@ public class GameManager : Singleton<GameManager>
         currentFeatureUnlock = FeatureUnlockConfig.GetFeatureData(currentFeatureid);
     }
 
-    public void CheckFeatureUnlock()
+    public void NextFeature()
     {
-        if (currentLevel == currentFeatureUnlock.levelUnlock)
-        {
-            currentFeatureid++;
-            GameDataManager.Ins.gamedata.currentFeatureId = currentFeatureid;
-            SaveData();
-        }
+        currentFeatureid++;
+        GameDataManager.Ins.gamedata.currentFeatureId = currentFeatureid;
+        SaveData();
     }
 
     public float GetFeatureProgress(int levelCheck)
@@ -167,12 +164,13 @@ public class GameManager : Singleton<GameManager>
         else if(currentFeatureid == 1)
         {
             levelToGet = currentFeatureUnlock.levelUnlock;
+            return (float)(levelCheck) / (float)levelToGet;
         }
         else
         {
             levelToGet = currentFeatureUnlock.levelUnlock - FeatureUnlockConfig.GetFeatureData(currentFeatureid - 1).levelUnlock;
         }
-        return (float)(levelCheck) / (float)levelToGet;
+        return (float)(levelCheck - levelToGet) / (float)levelToGet;
     }
 
     public void OnUpdateCoin(int amount)
@@ -200,7 +198,6 @@ public class GameManager : Singleton<GameManager>
             GetData();
             LoadHeartData();
             MainMenuManager.Ins.InitMenuUI();
-            EventManager.OnLevelComplete.AddListener(CheckFeatureUnlock);
         }
     }
 

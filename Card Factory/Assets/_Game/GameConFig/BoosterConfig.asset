@@ -19,21 +19,21 @@ MonoBehaviour:
     boosterIcon: {fileID: 0}
     boosterType: 1
     boosterCost: 550
-    levelUnlock: 8
+    levelUnlock: 1
   - id: 1
     boosterName: Swap
     Description: Swap card position
     boosterIcon: {fileID: 0}
     boosterType: 3
     boosterCost: 750
-    levelUnlock: 16
+    levelUnlock: 1
   - id: 2
     boosterName: Destroy Pack
     Description: Destroy 1 pack
     boosterIcon: {fileID: 0}
     boosterType: 2
     boosterCost: 850
-    levelUnlock: 21
+    levelUnlock: 1
   - id: 3
     boosterName: AddQueueSlot
     Description: Add 4 slots to queue

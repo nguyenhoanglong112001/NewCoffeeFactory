@@ -38,11 +38,9 @@ public class CardHolderGroup : MonoBehaviour
         }
     }
 
-    public bool isReordering;
     public void AllHolderMoveFront(Action onComplete = null)
     {
         int completeCount = 0;
-        isReordering = true;
         if (cardHolders.Count <= 1)
         {
             onComplete.Invoke();
@@ -62,7 +60,6 @@ public class CardHolderGroup : MonoBehaviour
                     completeCount++;
                     if (completeCount == cardHolders.Count - 1)
                     {
-                        isReordering = false;
                         onComplete?.Invoke();
                     }
                 });
@@ -82,6 +79,10 @@ public class CardHolderGroup : MonoBehaviour
             {
                 ColorSetup.SetUpObjectColor(cardHolders[1].colorHolder,holderNextImage);
             }
+        }
+        else
+        {
+            ColorSetup.SetHiddenUI(holderNextImage);
         }
         if(cardHolders.Count <= 0)
         {

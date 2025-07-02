@@ -31,7 +31,9 @@ public class ConveyorManager : MonoBehaviour
 
     //public bool isAllCardMove;
 
-    public float spacingDistance; 
+    public float spacingDistance;
+
+    public Transform boosterTargetPos;
 
     private void Start()
     {

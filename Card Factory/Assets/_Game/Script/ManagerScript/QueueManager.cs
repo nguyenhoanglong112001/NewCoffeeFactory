@@ -1,4 +1,4 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using JetBrains.Annotations;
 using System;
 using System.Collections;
@@ -59,6 +59,9 @@ public class QueueManager : MonoBehaviour
             int index = i;
             Card card = cardInQueue[index];
             if (card == null) continue;
+            card.currentQueueSlot?.SetCardOnQueue(null);
+            card.currentQueueSlot = avaliableQueues[index];
+            avaliableQueues[index].SetCardOnQueue(card);
             card.transform.DOJump(
                     avaliableQueues[index].transform.position,
                     2f,
@@ -103,7 +106,10 @@ public class QueueManager : MonoBehaviour
     IEnumerator WaitToRevive(List<Card> cardEnter)
     {
         yield return new WaitUntil(() => LevelManager.Ins.isReviveWait = false);
-        CardEnterQueue(cardEnter);
+        foreach(var card in cardEnter)
+        {
+            card.CheckColorOnEnter(card);
+        }
     }
 
     private void CardEnterQueue(List<Card> cardEnter)
