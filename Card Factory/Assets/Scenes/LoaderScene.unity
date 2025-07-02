@@ -245,6 +245,7 @@ MonoBehaviour:
   ConveyorManager: {fileID: 0}
   BoosterManager: {fileID: 0}
   poolManager: {fileID: 0}
+  MainCanvasRect: {fileID: 0}
   rewardConfig: {fileID: 11400000, guid: ea039eba35197534b90a400248ed6247, type: 2}
   boosterConfig: {fileID: 11400000, guid: e5ad787a2ef58164cb1e8613d01ca872, type: 2}
   FeatureUnlockConfig: {fileID: 11400000, guid: 21048c7d2160a4c47ba3ba32e7b19fe8, type: 2}
