@@ -11,6 +11,7 @@ public class UIManager : Singleton<UIManager>
 {
     public Canvas mainCanvas;
     public FeatureUIView featureUIView;
+    public BoosterPopUp boosterView;
 
     public Button addQueueButton;
     public Button OnCloseShopUI;
@@ -27,8 +28,6 @@ public class UIManager : Singleton<UIManager>
 
     public Sprite canBuyImage;
     public Sprite cantBuyImage;
-    public Sprite unlockBtImage;
-    public Sprite lockBtImage;
 
     public TMP_Text addSlotTxt;
     public TMP_Text coinText;
@@ -195,9 +194,13 @@ public class UIManager : Singleton<UIManager>
         reviveCostText.text = GameManager.Ins.rewardConfig.reviveCost.ToString();
     }
 
-    public void OnShowSettingPopUp()
+    public void OnShowSettingPopUp(GameObject pannel)
     {
         SettingPopUp.SetActive(true);
+        Vector3 orgScale = pannel.transform.localScale;
+        pannel.transform.localScale = Vector3.zero;
+        pannel.transform.DOScale(orgScale, 0.3f)
+            .SetUpdate(true);
         Time.timeScale = 0.0f;
     }
 
@@ -360,7 +363,6 @@ public class UIManager : Singleton<UIManager>
         foreach (var boosterType in boosterObject.Keys)
         {
             bool isUnlock = GameManager.Ins.currentLevel >= GameManager.Ins.boosterConfig.GetBoosterByType(boosterType).levelUnlock;
-            boosterObject[boosterType].GetComponent<Image>().sprite = isUnlock ? unlockBtImage : lockBtImage;
             for (int i = 0; i < boosterObject[boosterType].transform.childCount; i++)
             {
                 if (i == boosterObject[boosterType].transform.childCount - 1)

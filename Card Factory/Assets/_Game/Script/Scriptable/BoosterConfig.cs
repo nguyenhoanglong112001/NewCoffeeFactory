@@ -38,6 +38,7 @@ public class Booster
     public string boosterName;
     public string Description;
     public Sprite boosterIcon;
+    public string boosterDes;
     public BoosterType boosterType;
     public int boosterCost;
     public int levelUnlock;

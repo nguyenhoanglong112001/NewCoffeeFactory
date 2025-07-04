@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587a7ff4ced9f4843a73e13bc08d4a26, type: 3}
+  m_Name: Level 6
+  m_EditorClassIdentifier: 
+  level: 6
+  HolderType:
+  - holderColor: 0
+    Count: 2
+  - holderColor: 2
+    Count: 2
+  - holderColor: 1
+    Count: 2
+  HolderPoints:
+  - holderPos: 0.5
+    holderRotate: {x: 0, y: 0, z: 0}
+    holderDatas:
+    - holderColorIndex: 0
+      holderMechanic: 0
+    - holderColorIndex: 2
+      holderMechanic: 0
+    - holderColorIndex: 2
+      holderMechanic: 0
+    - holderColorIndex: 1
+      holderMechanic: 0
+    - holderColorIndex: 1
+      holderMechanic: 0
+  queueData:
+  - cardData:
+    - cardColorIndex: 1
+      cardNumber: 8
+      cardMechanic: 0
+    - cardColorIndex: 2
+      cardNumber: 12
+      cardMechanic: 0
+    - cardColorIndex: 1
+      cardNumber: 4
+      cardMechanic: 0
+    - cardColorIndex: 0
+      cardNumber: 6
+      cardMechanic: 0
+  ConveyorPrefab: {fileID: 5366234868849305060, guid: dc7a598eccd87d143acfc13727b2d881, type: 3}
+  holderOffset: {x: 0, y: 0, z: 3}
+  queuePrefab: {fileID: 4150156276069317871, guid: 742ea4c51d8497e4dbe2cdfbcdc64089, type: 3}
+  holderGroupPrefab: {fileID: 5390707746197584826, guid: ab1fe460a46e12c4980c4e9a31ed6bc9, type: 3}
+  CardHolder: {fileID: 5651952654279909729, guid: 59da0d26da8939b489060afce5e36538, type: 3}
+  CoffeCups: {fileID: 8861924263171003669, guid: eb7f6821ca6ad0a4282dfeb5c74afd3f, type: 3}

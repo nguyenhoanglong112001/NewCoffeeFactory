@@ -17,27 +17,31 @@ MonoBehaviour:
     boosterName: AddSlotConvey
     Description: Add 10 Slot to Conveyor
     boosterIcon: {fileID: 0}
+    boosterDes: 
     boosterType: 1
     boosterCost: 550
-    levelUnlock: 1
+    levelUnlock: 8
   - id: 1
     boosterName: Swap
     Description: Swap card position
-    boosterIcon: {fileID: 0}
+    boosterIcon: {fileID: 21300000, guid: ca619197610261141857cdc141731d53, type: 2}
+    boosterDes: Swap cups position in queue
     boosterType: 3
     boosterCost: 750
-    levelUnlock: 1
+    levelUnlock: 11
   - id: 2
     boosterName: Destroy Pack
     Description: Destroy 1 pack
     boosterIcon: {fileID: 0}
+    boosterDes: 
     boosterType: 2
     boosterCost: 850
-    levelUnlock: 1
+    levelUnlock: 21
   - id: 3
     boosterName: AddQueueSlot
     Description: Add 4 slots to queue
     boosterIcon: {fileID: 0}
+    boosterDes: 
     boosterType: 4
     boosterCost: 400
     levelUnlock: 6

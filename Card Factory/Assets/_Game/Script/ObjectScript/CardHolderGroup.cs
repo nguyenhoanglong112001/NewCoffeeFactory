@@ -47,7 +47,7 @@ public class CardHolderGroup : MonoBehaviour
         }
         for (int i =1; i < cardHolders.Count; i++)
         {
-            cardHolders[i].transform.DOLocalMove(holderPos[i - 1], 0.2f).
+            cardHolders[i].transform.DOLocalMove(holderPos[i - 1], 0.1f).
                 OnComplete(() =>
                 {
                     if (i - 1 == 0)

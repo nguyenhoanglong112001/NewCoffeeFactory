@@ -94,9 +94,10 @@ public class FeatureUIView : MonoBehaviour
             .OnComplete(() =>
             {
                 featureIcon.SetActive(true);
+                Vector3 featureScale = featureIcon.transform.localScale;
                 featureIcon.transform.localScale = Vector3.zero;
                 featureIcon.GetComponent<Image>().sprite = GameManager.Ins.currentFeatureUnlock.featureIcon;
-                featureIcon.transform.DOScale(Vector3.one, 0.3f)
+                featureIcon.transform.DOScale(featureScale, 0.3f)
                 .SetUpdate(true)
                 .OnComplete(() =>
                 {

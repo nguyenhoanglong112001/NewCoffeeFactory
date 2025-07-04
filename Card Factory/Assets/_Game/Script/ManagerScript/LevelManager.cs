@@ -53,6 +53,10 @@ public class LevelManager : Singleton<LevelManager>
         reviveTime = 1;
         isGameOver = false;
         isLevelComplete = false;
+        if(GameManager.Ins.BoosterManager.CheckForTutBooster(BoosterType.Swap))
+        {
+            UIManager.Ins.boosterView.OnShowPopUp();
+        }
     }
 
     public void InitForTut(int levelLoad)
@@ -203,8 +207,8 @@ public class LevelManager : Singleton<LevelManager>
         CardHolderGroup holderGroupPrefab = level.holderGroupPrefab;
         if (conveyPrefab != null)
         {
-            GameObject conveyor = Instantiate(conveyPrefab, conveySpawnPos.position, conveyPrefab.transform.rotation, conveySpawnPos);
-            conveyor.transform.position += level.ConveyorPrefab.ConveyorOffset;
+            Vector3 objSpawnPos = conveySpawnPos.position + level.ConveyorPrefab.ConveyorOffset;
+            GameObject conveyor = Instantiate(conveyPrefab, objSpawnPos, Quaternion.identity, conveySpawnPos);
             ConveyorManager conveyorManager = conveyor.GetComponent<ConveyorManager>();
             GameManager.Ins.BoosterManager.targetPos = conveyorManager.boosterTargetPos;
             GameManager.Ins.ConveyorManager = conveyorManager;
@@ -218,7 +222,7 @@ public class LevelManager : Singleton<LevelManager>
                 GameObject group = Instantiate(holderGroupPrefab.gameObject, spawnPos, conveyPrefab.transform.rotation, null);
                 Quaternion rotation = Quaternion.Euler(level.HolderPoints[i].holderRotate);
                 group.transform.rotation = rotation;
-                group.transform.position += level.ConveyorPrefab.ConveyorOffset;
+                //group.transform.position += level.ConveyorPrefab.ConveyorOffset;
 
                 CardHolderGroup groupHolder = group.GetComponent<CardHolderGroup>();
                 groupHolder.groupPos = percent;

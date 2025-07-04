@@ -1,7 +1,6 @@
 using ColorBlockJam;
 using DG.Tweening;
 using Dreamteck;
-using MoreMountains.Feedbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,16 +32,17 @@ public class BoosterManager : MonoBehaviour
     public int removePackCount;
 
     public Dictionary<BoosterType, int> boosterCount;
-    public Dictionary<BoosterType,MMF_Player> mmfLock;
+    public Dictionary<BoosterType, GameObject> boosterImageLock;
 
     public GameObject hammmer;
     public GameObject starVfx;
     public GameObject addQueuePopUp;
 
-    public MMF_Player addConveyLock;
-    public MMF_Player swapConveyLock;
-    public MMF_Player hammerLock;
+    public GameObject addConveyLockImage;
+    public GameObject removePackLockImage;
+    public GameObject swapLockImage;
 
+    private Tween shakeTween;
 
     public int NumberSlotAdd { get => numberSlotAdd; set => numberSlotAdd = value; }
     public int NumberAdd { get => numberAdd; set => numberAdd = value;}
@@ -57,12 +57,11 @@ public class BoosterManager : MonoBehaviour
             {BoosterType.AddConvey,addConveyCount},
             {BoosterType.RemovePack,removePackCount},
         };
-
-        mmfLock = new Dictionary<BoosterType, MMF_Player>
+        boosterImageLock = new Dictionary<BoosterType, GameObject>
         {
-            {BoosterType.Swap,swapConveyLock },
-            {BoosterType.AddConvey,addConveyLock },
-            {BoosterType.RemovePack,hammerLock }
+            {BoosterType.Swap,swapLockImage },
+            {BoosterType.RemovePack,removePackLockImage},
+            {BoosterType.AddConvey,addConveyLockImage},
         };
     }
     public void SetCurrentBooster(int boosterChoose)
@@ -78,7 +77,7 @@ public class BoosterManager : MonoBehaviour
         {
             if (GameManager.Ins.currentLevel < config.GetBoosterByType((BoosterType)boosterChoose).levelUnlock)
             {
-                mmfLock[(BoosterType)boosterChoose].PlayFeedbacks();
+                BoosterLockAnima((BoosterType)boosterChoose);
                 return;
             }
             if(GameManager.Ins.currentGold < config.GetBoosterByType((BoosterType)boosterChoose).boosterCost)
@@ -99,7 +98,20 @@ public class BoosterManager : MonoBehaviour
         UseBooster();
     }
 
-
+    private void BoosterLockAnima(BoosterType boosterType)
+    {
+        if (shakeTween != null && shakeTween.IsPlaying())
+            return; // ?ang shake thì không shake n?a
+        RectTransform rect = boosterImageLock[boosterType].GetComponent<RectTransform>();
+        shakeTween = rect.DOShakeAnchorPos(
+            duration: 0.5f,
+            strength: new Vector2(30,40),
+            vibrato: 10,
+            randomness: 90,
+            snapping: false,
+            fadeOut: true
+        );
+}
 
     public void UseBooster()
     {
@@ -136,9 +148,9 @@ public class BoosterManager : MonoBehaviour
 
     public void OnUseAddConvey()
     {
-        if(CheckForTutBooster(BoosterType.AddConvey))
+        if (TutorialInGameManager.Ins.isOnTutorial)
         {
-            if (TutorialInGameManager.Ins.isOnTutorial)
+            if (CheckForTutBooster(BoosterType.AddConvey))
             {
                 TutorialInGameManager.Ins.OnEndStage(() =>
                 {
@@ -151,6 +163,10 @@ public class BoosterManager : MonoBehaviour
                         }
                     }
                 });
+            }
+            else
+            {
+                return;
             }
         }
         RectTransform mainCanvas = UIManager.Ins.mainCanvas.GetComponent<RectTransform>();
@@ -256,6 +272,7 @@ public class BoosterManager : MonoBehaviour
 
     public void OnUseSwapBooster()
     {
+        Time.timeScale = 1.0f;
         foreach (var tile in LevelManager.Ins.queues)
         {
             foreach (var card in tile.cards)
@@ -336,6 +353,7 @@ public class BoosterManager : MonoBehaviour
         }
         moveToPos.OnComplete(() =>
         {
+            currentBooster = BoosterType.None;
             foreach (var tile in LevelManager.Ins.queues)
             {
                 foreach (var card in tile.cards)
@@ -343,7 +361,10 @@ public class BoosterManager : MonoBehaviour
                     card.canPress = true;
                 }
             }
-            currentBooster = BoosterType.None;
+            if(TutorialInGameManager.Ins.isOnTutorial)
+            {
+                OnCompleteTutBooster();
+            }
         });
     }
 
@@ -355,21 +376,7 @@ public class BoosterManager : MonoBehaviour
         }
         if(TutorialInGameManager.Ins.isOnTutorial)
         {
-            TutorialInGameManager.Ins.OnEndStage(() =>
-            {
-                foreach (var cards in GameManager.Ins.QueueManager.cardInQueue)
-                {
-                    cards.canPress = true;
-                }
-                foreach (var queue in LevelManager.Ins.queues)
-                {
-                    foreach (var card in queue.cards)
-                    {
-                        card.canPress = true;
-                    }
-                }
-            });
-            GameManager.Ins.isFirstTime = false;
+            OnCompleteTutBooster();
         }
         else
         {
@@ -410,6 +417,25 @@ public class BoosterManager : MonoBehaviour
             });
     }
 
+    public void OnCompleteTutBooster()
+    {
+        TutorialInGameManager.Ins.OnEndStage(() =>
+        {
+            foreach (var cards in GameManager.Ins.QueueManager.cardInQueue)
+            {
+                cards.canPress = true;
+            }
+            foreach (var queue in LevelManager.Ins.queues)
+            {
+                foreach (var card in queue.cards)
+                {
+                    card.canPress = true;
+                }
+            }
+        });
+        GameManager.Ins.isFirstTime = false;
+    }
+
     IEnumerator HandlePopUpAnim(Animator animator,string stateName,Action callback)
     {
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName(stateName))
@@ -423,5 +449,29 @@ public class BoosterManager : MonoBehaviour
     public bool CheckForTutBooster(BoosterType type)
     {
         return GameManager.Ins.currentLevel == GameManager.Ins.boosterConfig.GetBoosterByType(type).levelUnlock;
+    }
+
+    public void InitSwapTut()
+    {
+        if (CheckForTutBooster(BoosterType.Swap))
+        {
+            if (TutorialInGameManager.Ins.currentTutIndex == 5)
+            {
+                TutorialInGameManager.Ins.StartTut(() =>
+                {
+                    boosterCount[BoosterType.Swap] = 4;
+                    Time.timeScale = 0.0f;
+                    foreach (var queue in LevelManager.Ins.queues)
+                    {
+                        foreach (var card in queue.cards)
+                        {
+                            card.canPress = false;
+                        }
+                    }
+                });
+                TutorialStage currentStage = TutorialInGameManager.Ins.GetCurrentTut().GetCurrentStage();
+                currentStage.SetHandPointPos(UIManager.Ins.swapBt.gameObject.transform.position, new Vector3(1, 1, -1.5f));
+            }
+        }
     }
 }

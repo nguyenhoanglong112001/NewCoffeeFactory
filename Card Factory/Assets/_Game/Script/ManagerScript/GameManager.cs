@@ -151,6 +151,7 @@ public class GameManager : Singleton<GameManager>
     {
         currentFeatureid++;
         GameDataManager.Ins.gamedata.currentFeatureId = currentFeatureid;
+        currentFeatureUnlock = FeatureUnlockConfig.GetFeatureData(currentFeatureid);
         SaveData();
     }
 

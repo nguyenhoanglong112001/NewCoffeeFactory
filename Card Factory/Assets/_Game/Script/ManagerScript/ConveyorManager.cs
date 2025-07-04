@@ -48,13 +48,34 @@ public class ConveyorManager : MonoBehaviour
         follower.spline = spline;
     }
 
-    public void OnCheckCardHolder(SplineUser user,CardHolderGroup holderGroup)
+    public void OnCheckCardHolder(SplineUser user, CardHolderGroup holderGroup)
     {
         if (holderGroup.cardHolders.Count <= 0) return;
         cardTrigger = user.GetComponent<Card>();
-        if(cardTrigger != null )
+        CardHolder holder = holderGroup.cardHolders[0];
+
+        if (!holderGroup.cardHolders[0].isFull)
         {
-            cardTrigger.MoveToHolder(holderGroup);
+            if (holderGroup.cardHolders[0].colorHolder == cardTrigger.color)
+            {
+                holderGroup.cardHolders[0].cardHolder.Add(cardTrigger);
+            }
+        }
+        else
+        {
+            if (holderGroup.cardHolders.Count > 1) 
+            {
+                holder = holderGroup.cardHolders[1];
+                if (holderGroup.cardHolders[1].colorHolder == cardTrigger.color)
+                {
+                    holderGroup.cardHolders[1].cardHolder.Add(cardTrigger);
+                }
+            }
+        }
+
+        if (cardTrigger != null)
+        {
+            cardTrigger.MoveToHolder(holder);
         }
     }
 

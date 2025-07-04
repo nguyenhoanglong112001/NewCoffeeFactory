@@ -109,6 +109,10 @@ public class Card : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (GameManager.Ins.IsPointerOverUIObject())
+        {
+            return;
+        }
         if (!canPress) return;
         List<Card> cardSame = new List<Card>();
         if (isOnQueue)
@@ -293,7 +297,7 @@ public class Card : MonoBehaviour
         onComplete.Invoke();
         AudioManager.Ins.PlaySound("CardSound");
         Sequence moveTween = DOTween.Sequence();
-        moveTween.Append(this.transform.DOJump(conveyorManager.conveyEntrace.position, 4f, 1, 0.5f));
+        moveTween.Append(this.transform.DOJump(conveyorManager.conveyEntrace.position, 10f, 1, 0.5f));
         moveTween.Join(this.transform.DORotate(new Vector3(this.transform.rotation.x, objectRotate.transform.rotation.y, transform.rotation.z), 0.1f));
         moveTween.OnComplete(() =>
         {
@@ -435,36 +439,38 @@ public class Card : MonoBehaviour
     }
 
     Transform holderPos;
-    public void MoveToHolder(CardHolderGroup holder)
+    public void MoveToHolder(CardHolder cupsHolder)
     {
-                CardHolder cupsHolder = holder.cardHolders[0];
-        if (cupsHolder.isFull)
-        {
-            cupsHolder = holder.cardHolders[1];
-        }
-        if (holder.cardHolders[0].colorHolder != color) return;
-        if (holder.cardHolders[0].isFull) return;
+        if (cupsHolder.colorHolder != color) return;
         AudioManager.Ins.PlaySound("CardSound");
+
+        // Đăng ký card đang di chuyển
+        cupsHolder.RegisterMovingCard();
+
         Sequence moveToHolder = DOTween.Sequence();
+
         foreach (var holdercard in cupsHolder.cardHolderPos)
         {
-            if(holdercard.childCount <= 0)
+            if (holdercard.childCount <= 0)
             {
                 holderPos = holdercard;
                 this.transform.SetParent(holderPos);
                 break;
             }
         }
-        if (holderPos == null) return;
+
+        if (holderPos == null)
+        {
+            cupsHolder.UnregisterMovingCard();
+            return;
+        }
+
         follower.spline = null;
         follower.enabled = false;
-        moveToHolder.Append(transform.DOJump(
-            holderPos.position,   
-            2f,                   
-            1,                    
-            0.6f                  
-        ));
-        moveToHolder.Join(transform.DORotate(Vector3.zero, 0.6f));
+
+        Tween jumpTween = transform.DOLocalJump(Vector3.zero, 2f, 1, 0.3f);
+        moveToHolder.Append(jumpTween);
+
         Vector3 orgScale = cupsHolder.transform.localScale;
         moveToHolder.OnComplete(() =>
         {
@@ -473,8 +479,9 @@ public class Card : MonoBehaviour
             cardList.cards.Remove(this);
             cardList.CheckCard();
             CheckList();
-            holder.cardHolders[0].cardHolder.Add(this);
-            holder.cardHolders[0].CheckHolder();
+
+            cupsHolder.UnregisterMovingCard();
+
             this.transform.localScale = Vector3.one;
         });
     }

@@ -27,6 +27,7 @@ public class CardHolder : MonoBehaviour
 
     public Outline[] outlines;
     public bool isFull => cardHolder.Count >= cardCount;
+    private int movingCardsCount = 0;
 
     [Header("packs Vfx")]
     public GameObject packsVfx;
@@ -64,7 +65,7 @@ public class CardHolder : MonoBehaviour
     {
         if(isFull)
         {
-            if(GameManager.Ins.isFirstTime && TutorialInGameManager.Ins.isOnTutorial)
+            if (GameManager.Ins.isFirstTime && TutorialInGameManager.Ins.isOnTutorial)
             {
                 if(TutorialInGameManager.Ins.currentTutIndex == 1)
                 {
@@ -81,6 +82,7 @@ public class CardHolder : MonoBehaviour
             OnRemoveHolder();
         }
     }
+
 
     public void OnRemoveHolder()
     {
@@ -189,5 +191,19 @@ public class CardHolder : MonoBehaviour
         packsVfx.SetActive(true);
         ParticleSystem ps = packsVfx.GetComponent<ParticleSystem>();
         ps.Play();
+    }
+
+    public void RegisterMovingCard()
+    {
+        movingCardsCount++;
+    }
+
+    public void UnregisterMovingCard()
+    {
+        movingCardsCount--;
+        if (movingCardsCount <= 0)
+        {
+            CheckHolder();
+        }
     }
 }
