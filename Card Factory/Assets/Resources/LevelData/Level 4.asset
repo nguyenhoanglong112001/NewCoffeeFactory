@@ -21,7 +21,7 @@ MonoBehaviour:
   - holderColor: 1
     Count: 3
   HolderPoints:
-  - holderPos: 0.65
+  - holderPos: 0.7
     holderRotate: {x: 0, y: 90, z: 0}
     holderDatas:
     - holderColorIndex: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
       holderMechanic: 0
     - holderColorIndex: 0
       holderMechanic: 0
-  - holderPos: 0.8
+  - holderPos: 0.9
     holderRotate: {x: 0, y: 90, z: 0}
     holderDatas:
     - holderColorIndex: 2

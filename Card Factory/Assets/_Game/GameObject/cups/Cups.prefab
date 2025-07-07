@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follower: {fileID: 5014273233874225281}
+  cupsColor: []
   color: 0
   currentQueueSlot: {fileID: 0}
   cardrb: {fileID: 4459542020886710475}
@@ -415,7 +416,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ba3d9544460b6f54d9a1940d1c213c59, type: 2}
+  - {fileID: 2100000, guid: 0269ed027345ca64b81f8c096c0e22f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -501,7 +502,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ba3d9544460b6f54d9a1940d1c213c59, type: 2}
+  - {fileID: 2100000, guid: 0269ed027345ca64b81f8c096c0e22f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

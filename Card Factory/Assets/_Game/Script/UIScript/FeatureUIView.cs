@@ -18,7 +18,8 @@ public class FeatureUIView : MonoBehaviour
     public Animator giftBoxAnim;
     private AnimatorStateInfo AnimatorStateInfo;
     public Button featureNextButton;
-    public GameObject featureIcon;
+    public GameObject featureIconObject;
+    public Image featureIcon;
     public TMP_Text descriptionText;
 
     private Dictionary<GameObject, Vector3> originalScales = new();
@@ -47,6 +48,7 @@ public class FeatureUIView : MonoBehaviour
 
     public void OnShowProgressFeature()
     {
+        UIManager.Ins.completeUI.SetActive(false);
         OnShowPopUp(featureUnlockUI, true);
         featureNextButton.onClick.AddListener(UIManager.Ins.OnContinuePress);
         float progress = GameManager.Ins.GetFeatureProgress(GameManager.Ins.currentLevel -1);
@@ -93,16 +95,17 @@ public class FeatureUIView : MonoBehaviour
             .SetUpdate(true)
             .OnComplete(() =>
             {
-                featureIcon.SetActive(true);
-                Vector3 featureScale = featureIcon.transform.localScale;
-                featureIcon.transform.localScale = Vector3.zero;
-                featureIcon.GetComponent<Image>().sprite = GameManager.Ins.currentFeatureUnlock.featureIcon;
-                featureIcon.transform.DOScale(featureScale, 0.3f)
+                featureIconObject.SetActive(true);
+                descriptionText.text = GameManager.Ins.currentFeatureUnlock.description;
+                Vector3 featureScale = featureIconObject.transform.localScale;
+                featureIconObject.transform.localScale = Vector3.zero;
+                featureIcon.sprite = GameManager.Ins.currentFeatureUnlock.featureIcon;
+                descriptionText.gameObject.SetActive(true);
+                featureIconObject.transform.DOScale(featureScale, 0.3f)
                 .SetUpdate(true)
                 .OnComplete(() =>
                 {
                     featureNextButton.onClick.AddListener(UIManager.Ins.OnContinuePress);
-                    descriptionText.text = GameManager.Ins.currentFeatureUnlock.description;
                     GameManager.Ins.NextFeature();
                 });
             });

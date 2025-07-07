@@ -18,10 +18,10 @@ public class CardHolderGroup : MonoBehaviour
 
     public float groupPos;
     public SplineComputer splineCom;
+    public Transform counterTransform;
 
     public TMP_Text holderRemain;
     public Image completeImage;
-    public Image holderNextImage;
  
     private void Start()
     {
@@ -45,9 +45,13 @@ public class CardHolderGroup : MonoBehaviour
         {
             onComplete.Invoke();
         }
+        if(cardHolders.Count > 1)
+        {
+            cardHolders[1].OnCheckSlotDisPlay(true);
+        }
         for (int i =1; i < cardHolders.Count; i++)
         {
-            cardHolders[i].transform.DOLocalMove(holderPos[i - 1], 0.1f).
+            cardHolders[i].transform.DOLocalMove(holderPos[i - 1], 0.5f).
                 OnComplete(() =>
                 {
                     if (i - 1 == 0)
@@ -66,6 +70,7 @@ public class CardHolderGroup : MonoBehaviour
         }
     }
 
+
     public void CheckHolder()
     {
         holderRemain.text = (cardHolders.Count - 1).ToString();
@@ -73,16 +78,11 @@ public class CardHolderGroup : MonoBehaviour
         {
             if (cardHolders[1].HaveMechanic)
             {
-                ColorSetup.SetHiddenUI(holderNextImage);
+                foreach(var cardMat in cardHolders[1].rends)
+                {
+                    ColorSetup.SetColorHidden(cardMat.material);
+                }
             }
-            else
-            {
-                ColorSetup.SetUpObjectColor(cardHolders[1].colorHolder,holderNextImage);
-            }
-        }
-        else
-        {
-            ColorSetup.SetHiddenUI(holderNextImage);
         }
         if(cardHolders.Count <= 0)
         {

@@ -88,7 +88,7 @@ public class QueueManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(WaitToRevive(cardEnter));
+                StartCoroutine(WaitToRevive());
                 return;
             }
         }
@@ -103,12 +103,15 @@ public class QueueManager : MonoBehaviour
         currentStage.SetHandPointPos(UIManager.Ins.addQueueButton.gameObject.transform.position, new Vector3(0,1,-2));
     }
 
-    IEnumerator WaitToRevive(List<Card> cardEnter)
+    IEnumerator WaitToRevive()
     {
         yield return new WaitUntil(() => LevelManager.Ins.isReviveWait = false);
-        foreach(var card in cardEnter)
+        foreach(var card in GameManager.Ins.ConveyorManager.cardsMove)
         {
-            card.CheckColorOnEnter(card);
+            foreach (var cardRemain in card)
+            {
+                cardRemain.CheckColorOnEnter(cardRemain);
+            }
         }
     }
 

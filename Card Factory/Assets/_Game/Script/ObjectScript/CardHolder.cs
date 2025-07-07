@@ -1,4 +1,5 @@
 using cakeslice;
+using ColorBlockJam;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ public class CardHolder : MonoBehaviour
     public CardHolderGroup holderGroup;
     public List<Transform> cardHolderPos;
     public List<Card> cardHolder;
+    public List<GameObject> slotDisplay;
     private int cardCount;
     public CardColor colorHolder;
     public MeshRenderer[] rends;
@@ -32,6 +34,8 @@ public class CardHolder : MonoBehaviour
     [Header("packs Vfx")]
     public GameObject packsVfx;
     public ParticleSystem[] colorVfx;
+
+    public Tween moveOutOfScreen;
 
     private void Start()
     {
@@ -87,8 +91,11 @@ public class CardHolder : MonoBehaviour
     public void OnRemoveHolder()
     {
         DG.Tweening.Sequence s = DOTween.Sequence();
-        s.Append(transform.DOMoveY(transform.position.y + 2, 0.2f));
+        s.Append(transform.DOMoveY(transform.position.y + 1, 0.2f));
         s.Join(transform.DOMoveZ(transform.position.z - 6, 0.2f));
+        animator.transform.parent.gameObject.SetActive(true);
+        animator.SetTrigger("PackDone");
+        PlayAnimation();
         s.AppendInterval(0.2f);
         holderGroup.AllHolderMoveFront(() =>
         {
@@ -104,9 +111,6 @@ public class CardHolder : MonoBehaviour
         });
         s.OnComplete(() =>
         {
-            animator.transform.parent.gameObject.SetActive(true);
-            animator.SetTrigger("PackDone");
-            PlayAnimation();
         });
     }
 
@@ -122,12 +126,14 @@ public class CardHolder : MonoBehaviour
         float zOffset = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
         Vector3 offScreenRight = Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, zOffset));
 
-        transform.DOMoveX(offScreenRight.x, 0.2f).SetEase(Ease.Linear)
-                .OnComplete(() =>
-            {
-                LevelManager.Ins.OnCheckWingame();
-                GameManager.Ins.poolManager.packPool.Despawn(this.gameObject);
-            });
+        transform.DOMove(Help.GetOffscreenWorldPos(Vector2.right,this.transform), 0.5f)
+                          .SetEase(Ease.Linear)
+                          .OnComplete(() =>
+                          {
+                              LevelManager.Ins.OnCheckWingame();
+                              DOTween.Kill(moveOutOfScreen);
+                              GameManager.Ins.poolManager.packPool.Despawn(this.gameObject);
+                          });
     }
 
     public void ChangeCardColor()
@@ -150,8 +156,15 @@ public class CardHolder : MonoBehaviour
     public void CheckToShowHolder()
     {
         if (holderGroup.cardHolders.Count < 1) return;
-        if(holderGroup.cardHolders.IndexOf(this) > 0)
+        int holderIndex = holderGroup.cardHolders.IndexOf(this);
+        if (holderIndex > 0)
         {
+            if(holderIndex == 1)
+            {
+                this.gameObject.SetActive(true);
+                OnCheckSlotDisPlay(false);
+                return;
+            }
             this.gameObject.SetActive(false);
             return;
         }
@@ -175,15 +188,10 @@ public class CardHolder : MonoBehaviour
     public void AnimateHolder()
     {
         ColorSetup.SetCustomOutlineColor(colorHolder);
-        SetPacksOutLine(true, 2);
         Vector3 orgScale = this.gameObject.transform.localScale;
         Sequence s = DOTween.Sequence();
         s.Append(transform.DOScale(orgScale * 1.2f, 0.2f).SetEase(Ease.OutQuad));
         s.Append(transform.DOScale(orgScale, 0.2f).SetEase(Ease.OutQuad));
-        s.OnComplete(() =>
-        {
-            SetPacksOutLine(false);
-        });
     }
 
     public void PlayVfx()
@@ -191,6 +199,12 @@ public class CardHolder : MonoBehaviour
         packsVfx.SetActive(true);
         ParticleSystem ps = packsVfx.GetComponent<ParticleSystem>();
         ps.Play();
+    }
+
+    public void OnCheckSlotDisPlay(bool isActive)
+    {
+        slotDisplay[0].SetActive(isActive);
+        slotDisplay[1].SetActive(isActive);
     }
 
     public void RegisterMovingCard()

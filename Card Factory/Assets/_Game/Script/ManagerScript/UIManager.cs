@@ -276,7 +276,7 @@ public class UIManager : Singleton<UIManager>
         RectTransform rect = shopUI.transform.GetChild(1).GetComponent<RectTransform>();
 
         rect.anchoredPosition = new Vector2(0, Screen.height);
-        rect.DOAnchorPos(Vector2.zero, 0.5f).SetEase(Ease.OutBack);
+        rect.DOAnchorPos(Vector2.zero, 0.5f).SetEase(Ease.OutBack).SetUpdate(true);
     }
 
     public void OnCloseBtPress(GameObject ui)

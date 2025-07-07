@@ -11,9 +11,6 @@ public class CardQueue : MonoBehaviour
     public List<Vector3> cardPos;
     public Vector3 spacing;
 
-    public Transform firstPos;
-    public Transform lastPos;
-
     public Transform transParent;
 
     private void Start()

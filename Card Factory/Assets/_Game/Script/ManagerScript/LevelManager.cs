@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -78,10 +79,6 @@ public class LevelManager : Singleton<LevelManager>
             TutorialInGameManager.Ins.StartTut();
             TutorialStage currentStage = TutorialInGameManager.Ins.GetCurrentTut().GetCurrentStage();
             currentStage.SetHandPointPos(queues[0].cardPos[0], new Vector3(-1, 3, -9));
-            foreach (var card in queues[1].cards)
-            {
-                card.canPress = false;
-            }
         }
     }
 
@@ -222,11 +219,15 @@ public class LevelManager : Singleton<LevelManager>
                 GameObject group = Instantiate(holderGroupPrefab.gameObject, spawnPos, conveyPrefab.transform.rotation, null);
                 Quaternion rotation = Quaternion.Euler(level.HolderPoints[i].holderRotate);
                 group.transform.rotation = rotation;
-                //group.transform.position += level.ConveyorPrefab.ConveyorOffset;
+
 
                 CardHolderGroup groupHolder = group.GetComponent<CardHolderGroup>();
                 groupHolder.groupPos = percent;
                 holderGroups.Add(groupHolder);
+                Vector3 countRotate = groupHolder.counterTransform.localEulerAngles;
+                countRotate.z = level.HolderPoints[i].holderRotate.y;
+                groupHolder.counterTransform.localRotation = Quaternion.Euler(countRotate);
+                Debug.Log(level.HolderPoints[i].holderRotate.y);
 
                 GameManager.Ins.poolManager.packPool.Prefab = level.CardHolder.gameObject;
 

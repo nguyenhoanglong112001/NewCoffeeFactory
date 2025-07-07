@@ -22,7 +22,7 @@ MonoBehaviour:
     featureName: Hidden Cups
     levelUnlock: 6
     description: Hidden Color Of Cups. Get the cups above to show color
-    featureIcon: {fileID: 0}
+    featureIcon: {fileID: 21300000, guid: b24ddae3aeb773d4ea70d34da28ead24, type: 3}
   - featureID: 3
     featureName: New Color
     levelUnlock: 10
