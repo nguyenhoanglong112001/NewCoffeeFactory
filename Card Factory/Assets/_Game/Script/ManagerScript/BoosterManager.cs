@@ -1,4 +1,4 @@
-using ColorBlockJam;
+﻿using ColorBlockJam;
 using DG.Tweening;
 using Dreamteck;
 using System;
@@ -101,7 +101,7 @@ public class BoosterManager : MonoBehaviour
     private void BoosterLockAnima(BoosterType boosterType)
     {
         if (shakeTween != null && shakeTween.IsPlaying())
-            return; // ?ang shake th� kh�ng shake n?a
+            return; // ?ang shake thì không shake n?a
         RectTransform rect = boosterImageLock[boosterType].GetComponent<RectTransform>();
         shakeTween = rect.DOShakeAnchorPos(
             duration: 0.5f,
@@ -389,20 +389,26 @@ public class BoosterManager : MonoBehaviour
         }
         addQueuePopUp.SetActive(true);
         StartCoroutine(HandlePopUpAnim(addQueuePopUp.GetComponent<Animator>(), "Textspawn", () => addQueuePopUp.SetActive(false)));
+        AddSlotToQueue();
+    }
+
+    private float distanceMove = 1.4f;
+    private void AddSlotToQueue()
+    {
         int firstRowIndex = GameManager.Ins.QueueManager.avaliableQueues.Count / 2;
-        for(int i = 0; i < NumberSlotAdd; i++)
+        for (int i = 0; i < NumberSlotAdd; i++)
         {
             GameManager.Ins.QueueManager.cardInQueue.Add(null);
         }
         List<QueueSlot> extend = GameManager.Ins.QueueManager.extendSlot.ToList();
-        for (int i = 0; i<NumberSlotAdd; i++)
+        for (int i = 0; i < NumberSlotAdd; i++)
         {
             QueueSlot slotAdd = extend[i];
             GameManager.Ins.QueueManager.extendSlot.Remove(slotAdd);
             slotAdd.gameObject.SetActive(true);
-            if(i % 2 == 0)
+            if (i % 2 == 0)
             {
-                GameManager.Ins.QueueManager.avaliableQueues.Insert(firstRowIndex + i/2,slotAdd);
+                GameManager.Ins.QueueManager.avaliableQueues.Insert(firstRowIndex + i / 2, slotAdd);
             }
             else
             {
@@ -410,20 +416,46 @@ public class BoosterManager : MonoBehaviour
             }
         }
         EventManager.OnQueueCountChange.Invoke();
-        queueCover.DOLocalMove(new Vector3(queueCover.localPosition.x - 1.45f * (NumberSlotAdd / 2), queueCover.localPosition.y, queueCover.localPosition.z), 0.1f)
-            .OnComplete(() =>
-            {
-                GameManager.Ins.QueueManager.ReOrderQueue();
-            });
+        QueueManager queue = GameManager.Ins.QueueManager;
+        Sequence s = DOTween.Sequence();
+        distanceMove = distanceMove - numberSlotAdd / 10f;
+        if(distanceMove <= 0)
+        {
+            distanceMove = 0;
+            Vector3 originalScale = queueCover.localScale;
+            Vector3 originalPos = queueCover.position;
+
+            // Tính khoảng cách cần di chuyển để giữ bên trái cố định
+            float scaleChange = originalScale.x - 0.1f;
+            float moveDistance = scaleChange * 0.5f;
+
+            // Scale X và move sang trái cùng lúc
+            s.Append(queueCover.DOScaleX(scaleChange, 0.1f));
+            s.Join(queueCover.DOMoveX(originalPos.x - moveDistance, 0.1f)); // Đổi dấu thành âm
+
+            s.SetEase(Ease.OutQuad);
+        }
+        else
+        {
+            s.Append(queueCover.DOLocalMove(new Vector3(queueCover.localPosition.x - 1.4f * (NumberSlotAdd / 2), queueCover.localPosition.y, queueCover.localPosition.z), 0.1f));
+            s.Append(queue.transform.DOMoveX(queue.transform.position.x + distanceMove, 0.1f));
+        }
+        s.OnComplete(() =>
+        {
+            GameManager.Ins.QueueManager.ReOrderQueue();
+        });
     }
 
     public void OnCompleteTutBooster()
     {
         TutorialInGameManager.Ins.OnEndStage(() =>
         {
-            foreach (var cards in GameManager.Ins.QueueManager.cardInQueue)
+            if(GameManager.Ins.QueueManager.cardInQueue.Count > 0)
             {
-                cards.canPress = true;
+                foreach (var cards in GameManager.Ins.QueueManager.cardInQueue)
+                {
+                    if (cards != null) cards.canPress = true;
+                }
             }
             foreach (var queue in LevelManager.Ins.queues)
             {

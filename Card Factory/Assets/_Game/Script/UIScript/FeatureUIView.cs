@@ -48,7 +48,7 @@ public class FeatureUIView : MonoBehaviour
 
     public void OnShowProgressFeature()
     {
-        UIManager.Ins.completeUI.SetActive(false);
+        UIManager.Ins.levelCompleteView.gameObject.SetActive(false);
         OnShowPopUp(featureUnlockUI, true);
         featureNextButton.onClick.AddListener(UIManager.Ins.OnContinuePress);
         float progress = GameManager.Ins.GetFeatureProgress(GameManager.Ins.currentLevel -1);

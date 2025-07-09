@@ -261,7 +261,7 @@ MonoBehaviour:
       cardNumber: 2
       cardMechanic: 0
   ConveyorPrefab: {fileID: 5366234868849305060, guid: dc7a598eccd87d143acfc13727b2d881, type: 3}
-  holderOffset: {x: 0, y: 0, z: 3}
+  holderOffset: {x: 0, y: 2, z: 3}
   queuePrefab: {fileID: 4150156276069317871, guid: 742ea4c51d8497e4dbe2cdfbcdc64089, type: 3}
   holderGroupPrefab: {fileID: 5390707746197584826, guid: ab1fe460a46e12c4980c4e9a31ed6bc9, type: 3}
   CardHolder: {fileID: 5651952654279909729, guid: 59da0d26da8939b489060afce5e36538, type: 3}

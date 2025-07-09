@@ -68,7 +68,6 @@ public class GameManager : Singleton<GameManager>
         {
             OnChangeGameState(GameState.MainMenu);
         }
-        AudioManager.Ins.PlayMusic("BackGroundMenu");
     }
 
     private void Update()
@@ -199,6 +198,8 @@ public class GameManager : Singleton<GameManager>
             GetData();
             LoadHeartData();
             MainMenuManager.Ins.InitMenuUI();
+                        AudioManager.Ins.StopSound("BackGroundInGameMusic");
+            AudioManager.Ins.PlayMusic("BackGroundMenu");
         }
     }
 

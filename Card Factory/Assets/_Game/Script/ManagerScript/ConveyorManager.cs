@@ -14,6 +14,7 @@ public class ConveyorManager : MonoBehaviour
     public Card cardTrigger;
     public Transform rotateObject;
     public Transform conveyEntrace;
+    public Transform doorEnterance;
     [ShowInInspector]
     public List<List<Card>> cardsMove;
     public HashSet<List<Card>> cardsHash;

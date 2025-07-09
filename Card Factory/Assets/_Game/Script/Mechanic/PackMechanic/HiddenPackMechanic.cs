@@ -1,4 +1,4 @@
-using Dreamteck;
+﻿using Dreamteck;
 using UnityEngine;
 
 public class HiddenPackMechanic : BasePackMechanic
@@ -9,8 +9,8 @@ public class HiddenPackMechanic : BasePackMechanic
         Debug.Log("Change Color visual",this.gameObject);
         foreach(var rend in packOwner.rends)
         {
-            Material mat = rend.material;
-            ColorSetup.SetColorHidden(mat);
+            Material newMat = packOwner.objectcolor.GetColor(CardColor.Hidden); // lấy material mới từ objectColor
+            rend.material = newMat; // GÁN lại vào renderer để áp dụng
         }
     }
 
@@ -27,8 +27,8 @@ public class HiddenPackMechanic : BasePackMechanic
         base.RemoveMechanic();
         foreach (var rend in packOwner.rends)
         {
-            Material mat = rend.material;
-            ColorSetup.SetMatColor(packOwner.colorHolder,mat);
+            Material newMat = packOwner.objectcolor.GetColor(packOwner.colorHolder); // lấy material mới từ objectColor
+            rend.material = newMat; // GÁN lại vào renderer để áp dụng
         }
     }
 

@@ -1,4 +1,4 @@
-using cakeslice;
+﻿using cakeslice;
 using ColorBlockJam;
 using DG.Tweening;
 using System.Collections;
@@ -18,6 +18,7 @@ public class CardHolder : MonoBehaviour
     private int cardCount;
     public CardColor colorHolder;
     public MeshRenderer[] rends;
+    public ObjectColor objectcolor;
 
     public BasePackMechanic packMechanic;
     public PackMechanic currentMechanic;
@@ -34,8 +35,10 @@ public class CardHolder : MonoBehaviour
     [Header("packs Vfx")]
     public GameObject packsVfx;
     public ParticleSystem[] colorVfx;
+    public GameObject trailVfx;
 
     public Tween moveOutOfScreen;
+
 
     private void Start()
     {
@@ -91,11 +94,11 @@ public class CardHolder : MonoBehaviour
     public void OnRemoveHolder()
     {
         DG.Tweening.Sequence s = DOTween.Sequence();
-        s.Append(transform.DOMoveY(transform.position.y + 1, 0.2f));
-        s.Join(transform.DOMoveZ(transform.position.z - 6, 0.2f));
+        trailVfx.SetActive(true);
+
         animator.transform.parent.gameObject.SetActive(true);
         animator.SetTrigger("PackDone");
-        PlayAnimation();
+        HandlePackAnim(animator);
         s.AppendInterval(0.2f);
         holderGroup.AllHolderMoveFront(() =>
         {
@@ -109,39 +112,34 @@ public class CardHolder : MonoBehaviour
                 holder.CheckToShowHolder();
             }
         });
-        s.OnComplete(() =>
-        {
-        });
     }
 
-    private void PlayAnimation()
-    {
-        StartCoroutine(HandlePackAnim(animator));
-    }
-
-    public IEnumerator HandlePackAnim(Animator animator)
+    public void HandlePackAnim(Animator animator)
     {
         AnimationClip animclip = animator.runtimeAnimatorController.animationClips.First(c => c.name == "Inboxes");
-        yield return new WaitForSeconds(animclip.length);
-        float zOffset = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
-        Vector3 offScreenRight = Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, zOffset));
 
-        transform.DOMove(Help.GetOffscreenWorldPos(Vector2.right,this.transform), 0.5f)
-                          .SetEase(Ease.Linear)
-                          .OnComplete(() =>
-                          {
-                              LevelManager.Ins.OnCheckWingame();
-                              DOTween.Kill(moveOutOfScreen);
-                              GameManager.Ins.poolManager.packPool.Despawn(this.gameObject);
-                          });
+        Sequence s = DOTween.Sequence();
+        s.Append(transform.DOMoveY(transform.position.y + 3, 0.2f));
+        s.AppendInterval(animclip.length);
+        s.Append(transform.DOMoveZ(transform.position.z - 6, 0.3f));
+        s.Join(transform.DORotate(new Vector3(0, -90f, 0), 0.3f));
+        s.Join(transform.DOMoveX(Help.GetOffscreenWorldPos(Vector2.right, this.transform).x, 0.5f)
+            .SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                LevelManager.Ins.OnCheckWingame();
+                GameManager.Ins.poolManager.packPool.Despawn(this.gameObject);
+            }));
+
+        s.Play();
     }
 
     public void ChangeCardColor()
     {
         foreach(var rend in rends)
         {
-            Material mat = rend.material;
-            ColorSetup.SetMatColor(colorHolder, mat);
+            Material newMat = objectcolor.GetColor(colorHolder);
+            rend.material = newMat;
         }
     }
 

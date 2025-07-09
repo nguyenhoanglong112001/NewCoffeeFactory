@@ -11,42 +11,42 @@ public enum CardColor
     Yellow = 3,
     Purple = 4,
     Orange = 5,
+    Hidden = 6
 }
 public static class ColorSetup
 {
     public static void SetMatColor(CardColor colorSet,Material mat)
     {
-        mat.mainTextureScale = Vector2.zero;
         switch (colorSet)
         {
             case CardColor.Red:
                 {
-                    mat.mainTextureOffset = new Vector2(7f/16f, 2f/4f);
+                    mat.SetColor("_BaseColor", new Color(255,0,0));
                     break;
                 }
             case CardColor.Green:
                 {
-                    mat.mainTextureOffset = new Vector2(1f / 16f, 2 / 4f);
+                    mat.SetColor("_BaseColor", new Color(0, 255, 0));
                     break;
                 }
             case CardColor.Blue:
                 {
-                    mat.mainTextureOffset = new Vector2(9f / 16f, 2 / 4f);
+                    mat.SetColor("_BaseColor", new Color(0, 191, 255));
                     break;
                 }
             case CardColor.Yellow:
                 {
-                    mat.mainTextureOffset = new Vector2(3f / 16f, 2 / 4f);
+                    mat.SetColor("_BaseColor", new Color(255, 255, 0));
                     break;
                 }
             case CardColor.Purple:
                 {
-                    mat.mainTextureOffset = new Vector2(13f / 16f, 2 / 4f);
+                    mat.SetColor("_BaseColor", new Color(128, 128, 0));
                     break;
                 }
             case CardColor.Orange:
                 {
-                    mat.mainTextureOffset = new Vector2(5f / 16f, 2 / 4f);
+                    mat.SetColor("_BaseColor", new Color(255, 165, 0));
                     break;
                 }
         }
@@ -144,6 +144,6 @@ public static class ColorSetup
 
     public static void SetColorHidden(Material mat)
     {
-        mat.mainTextureOffset = new Vector2(6f / 16f, 0 / 4f);
+        mat.SetColor("_BaseColor", new Color(128, 128, 128));
     }
 }

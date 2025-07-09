@@ -12,10 +12,12 @@ public class UIManager : Singleton<UIManager>
     public Canvas mainCanvas;
     public FeatureUIView featureUIView;
     public BoosterPopUp boosterView;
+    public LevelCompleteView levelCompleteView;
+    public ReviveUIView reviveUIView;
+    public LevelFailView levelFailView;
 
     public Button addQueueButton;
     public Button OnCloseShopUI;
-    public Button continueBt;
     public Button giveUpBt;
     public Button replayBt;
     public Button restarQuitBt;
@@ -31,7 +33,7 @@ public class UIManager : Singleton<UIManager>
 
     public TMP_Text addSlotTxt;
     public TMP_Text coinText;
-    public TMP_Text rewardText;
+
 
     [Header("====BoosterUI====")]
     public TMP_Text addConveyCost;
@@ -44,7 +46,6 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text levelText;
     public TMP_Text reviveCostText;
 
-    public GameObject completeUI;
     public GameObject failUI;
     public GameObject reviveUI;
     public GameObject addConveyPopUp;
@@ -123,7 +124,6 @@ public class UIManager : Singleton<UIManager>
 
     private void Start()
     {
-        continueBt.onClick.AddListener(featureUIView.OnShowProgressFeature);
         giveUpBt.onClick.AddListener(OnContinuePress);
         _notifyOrgPos = notify.GetComponent<RectTransform>().anchoredPosition;
         quitBt.onClick.AddListener(() =>
@@ -169,12 +169,7 @@ public class UIManager : Singleton<UIManager>
 
     public void OnShowWinUI()
     {
-        CanvasGroup canvasgroup = completeUI.GetComponent<CanvasGroup>();
-        OnShowRewardText();
-        completeUI.SetActive(true);
-        canvasgroup.alpha = 0f;
-        canvasgroup.DOFade(1f, 0.3f)
-            .SetUpdate(true);
+        levelCompleteView.gameObject.SetActive(true);
     }
 
     public void OnShowFailUI()
@@ -196,6 +191,11 @@ public class UIManager : Singleton<UIManager>
 
     public void OnShowSettingPopUp(GameObject pannel)
     {
+        if(SettingPopUp.activeSelf)
+        {
+            OnResumePress();
+            return;
+        }
         SettingPopUp.SetActive(true);
         Vector3 orgScale = pannel.transform.localScale;
         pannel.transform.localScale = Vector3.zero;
@@ -230,11 +230,6 @@ public class UIManager : Singleton<UIManager>
     public void OnShowCoinUI(int currentCoin)
     {
         coinText.text = currentCoin.ToString();
-    }
-
-    public void OnShowRewardText()
-    {
-        rewardText.text = GameManager.Ins.rewardConfig.coinReward.ToString();
     }
 
     public void OnShowAddSlotCost()

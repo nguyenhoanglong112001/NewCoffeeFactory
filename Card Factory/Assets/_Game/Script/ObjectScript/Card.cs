@@ -13,7 +13,7 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     [SerializeField] private SplineFollower follower;
-    public List<GameObject> cupsColor;
+    public ObjectColor objectColor; 
     public CardColor color;
     public QueueSlot currentQueueSlot;
     public Rigidbody cardrb;
@@ -79,7 +79,7 @@ public class Card : MonoBehaviour
         }
         if (isOnSpawnQueue)
         {
-            cardSame = this.cardList.cards;
+            cardSame = GetCardGroupConsecutuve(cardList, cardQueue.cardLists);
         }
         if (conveyorManager.isFullConvey(cardSame))
         {
@@ -89,7 +89,7 @@ public class Card : MonoBehaviour
         }
         if (isOnSpawnQueue)
         {
-            if (cardQueue.cardLists.IndexOf(cardList) != 0)
+            if (cardQueue.cards.IndexOf(cardSame[0]) != 0)
             {
                 EnableCardOutLine(false);
                 canPress = true;
@@ -143,7 +143,7 @@ public class Card : MonoBehaviour
         }
         if (isOnSpawnQueue)
         {
-            if (cardQueue.cardLists.IndexOf(cardList) != 0)
+            if (cardQueue.cards.IndexOf(cardSame[0]) != 0)
             {
                 canPress = true;
                 return;
@@ -184,13 +184,14 @@ public class Card : MonoBehaviour
     {
         if (GameManager.Ins.BoosterManager.currentBooster != BoosterType.None) return;
         canPress = false;
+        List<Card> cardSame = GetCardGroupConsecutuve(cardList, cardQueue.cardLists);
         if (cardQueue.cards.Contains(this))
         {
             if (GameManager.Ins.isFirstTime)
             {
                 if (GameManager.Ins.BoosterManager.CheckForTutBooster(BoosterType.AddQueueSlot))
                 {
-                    queueManager.CountForTut(cardList.cards.Count);
+                    queueManager.CountForTut(cardSame.Count);
                     if (queueManager.countForTut >= queueManager.avaliableQueues.Count)
                     {
                         foreach (var queue in LevelManager.Ins.queues)
@@ -204,13 +205,17 @@ public class Card : MonoBehaviour
                     }
                 }
             }
-            if (cardQueue.cardLists[0] == cardList)
+            if (cardQueue.cards[0] == cardSame[0])
             {
-                StartCoroutine(CardSameMoveToConvey(cardList.cards, () =>
+                StartCoroutine(CardSameMoveToConvey(cardSame, () =>
                 {
                     cardQueue.AllCardOnQueueMove();
 
                 }));
+            }
+            else
+            {
+                canPress = true;
             }
 
         }
@@ -235,9 +240,7 @@ public class Card : MonoBehaviour
                 }
             }
             cardSameColor = GetListConsecutiveCard(this, queueManager.cardInQueue);
-            StartCoroutine(CardSameMoveToConvey(cardSameColor, () =>
-            {
-            }));
+            StartCoroutine(CardSameMoveToConvey(cardSameColor));
         }
     }
 
@@ -313,11 +316,13 @@ public class Card : MonoBehaviour
 
     private void CardMoveToConvey(Action onComplete = null)
     {
+        Sequence jumpConVey = DOTween.Sequence();
         onComplete.Invoke();
         cardList.queue.cardLists.Remove(cardList);
         AudioManager.Ins.PlaySound("CardSound");
-        this.transform.DOJump(conveyorManager.conveyEntrace.position, 10f, 1, 0.5f)
-        .OnComplete(() =>
+        jumpConVey.Append(transform.DOJump(conveyorManager.doorEnterance.position, 8f, 1, 0.6f));
+        jumpConVey.Append(transform.DOMove(conveyorManager.conveyEntrace.position, 0.3f));
+        jumpConVey.OnComplete(() =>
         {
             conveyorManager.SetSpline(follower);
             conveyorManager.OnAddFollower(follower);
@@ -455,6 +460,36 @@ public class Card : MonoBehaviour
         return cardSameColor;
     }
 
+    public List<Card> GetCardGroupConsecutuve(CardList cardGroup, List<CardList> cardGroupes)
+    {
+        List<Card> cardSame = new List<Card>();
+        int index = cardGroupes.IndexOf(cardGroup);
+        cardSame.AddRange(cardGroup.cards);
+
+        for(int i = index - 1;i>= 0;i--)
+        {
+            if (cardGroupes[i] == null) continue;
+            if (cardGroupes[i].HaveMechanic) break;
+            if (cardGroupes[i].listColor == cardGroup.listColor)
+            {
+                cardSame.InsertRange(0, cardGroupes[i].cards);
+            }
+            else break;
+        }
+
+        for(int i = index + 1;i < cardGroupes.Count; i++)
+        {
+            if (cardGroupes[i] == null) continue;
+            if (cardGroupes[i].HaveMechanic) break;
+            if (cardGroupes[i].listColor == cardGroup.listColor)
+            {
+                cardSame.AddRange(cardGroupes[i].cards);
+            }
+            else break;
+        }
+        return cardSame;
+    }
+
     Transform holderPos;
     public void MoveToHolder(CardHolder cupsHolder)
     {
@@ -511,8 +546,8 @@ public class Card : MonoBehaviour
         }
         foreach (var render in rend)
         {
-            Material mat = render.material;
-            ColorSetup.SetMatColor(color, mat);
+            Material newMat = objectColor.GetColor(color);
+            render.material = newMat;
         }
     }
 

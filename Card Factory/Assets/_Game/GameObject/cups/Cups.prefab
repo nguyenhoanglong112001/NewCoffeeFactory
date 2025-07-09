@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follower: {fileID: 5014273233874225281}
-  cupsColor: []
+  objectColor: {fileID: 11400000, guid: 54bd677fa1575ac49a23e4a838d8ca80, type: 2}
   color: 0
   currentQueueSlot: {fileID: 0}
   cardrb: {fileID: 4459542020886710475}

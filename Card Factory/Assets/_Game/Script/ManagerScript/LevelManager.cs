@@ -227,7 +227,6 @@ public class LevelManager : Singleton<LevelManager>
                 Vector3 countRotate = groupHolder.counterTransform.localEulerAngles;
                 countRotate.z = level.HolderPoints[i].holderRotate.y;
                 groupHolder.counterTransform.localRotation = Quaternion.Euler(countRotate);
-                Debug.Log(level.HolderPoints[i].holderRotate.y);
 
                 GameManager.Ins.poolManager.packPool.Prefab = level.CardHolder.gameObject;
 

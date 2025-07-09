@@ -1,4 +1,4 @@
-using System.Drawing;
+﻿using System.Drawing;
 using UnityEngine;
 
 public class HiddenMechanic : BaseCardMechanics
@@ -17,8 +17,8 @@ public class HiddenMechanic : BaseCardMechanics
         {
             foreach (var rend in card.rend)
             {
-                Material mat = rend.material;
-                ColorSetup.SetColorHidden(mat);
+                Material newMat = card.objectColor.GetColor(CardColor.Hidden); // lấy material mới từ objectColor
+                rend.material = newMat; // GÁN lại vào renderer để áp dụng
             }
         }
     }
@@ -30,8 +30,8 @@ public class HiddenMechanic : BaseCardMechanics
         {
             foreach (var rend in card.rend)
             {
-                Material mat = rend.material;
-                ColorSetup.SetMatColor(cardOwner.listColor, mat);
+                Material newMat = card.objectColor.GetColor(card.color); // lấy material mới từ objectColor
+                rend.material = newMat; // GÁN lại vào renderer để áp dụng
             }
         }
     }
