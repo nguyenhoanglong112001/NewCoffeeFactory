@@ -198,7 +198,7 @@ public class GameManager : Singleton<GameManager>
             GetData();
             LoadHeartData();
             MainMenuManager.Ins.InitMenuUI();
-                        AudioManager.Ins.StopSound("BackGroundInGameMusic");
+            AudioManager.Ins.StopSound("BackGroundInGameMusic");
             AudioManager.Ins.PlayMusic("BackGroundMenu");
         }
     }

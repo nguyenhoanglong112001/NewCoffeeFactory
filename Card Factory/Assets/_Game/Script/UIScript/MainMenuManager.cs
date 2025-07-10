@@ -154,9 +154,7 @@ public class MainMenuManager : Singleton<MainMenuManager>
 
     public void OnShowPopUp(GameObject popUp,bool isActive)
     {
-
         GameObject popUpScale = popUp.transform.GetChild(1).transform.GetChild(0).gameObject;
-
         if (!originalScales.ContainsKey(popUpScale))
             originalScales[popUpScale] = popUpScale.transform.localScale;
         if (isActive)
@@ -164,6 +162,7 @@ public class MainMenuManager : Singleton<MainMenuManager>
             popUpScale.transform.localScale = Vector3.zero;
             popUpScale.transform.DOScale(originalScales[popUpScale], 0.3f);
         }
+        popUp.SetActive(isActive);
     }
 
     private void OnDestroy()

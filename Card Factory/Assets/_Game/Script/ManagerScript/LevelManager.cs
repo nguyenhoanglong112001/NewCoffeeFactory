@@ -132,7 +132,7 @@ public class LevelManager : Singleton<LevelManager>
             isGameOver = true;
             isLevelComplete = true;
             AudioManager.Ins.PlaySound("CompleteSound");
-            UIManager.Ins.OnShowWinUI();
+            UIManager.Ins.OnShowPopUp(UIManager.Ins.levelCompleteView.gameObject,true);
             EventManager.OnLevelComplete.Invoke();
             GameManager.Ins.currentLevel++;
             GameDataManager.Ins.gamedata.currentLevel = GameManager.Ins.currentLevel;
@@ -150,14 +150,14 @@ public class LevelManager : Singleton<LevelManager>
         isGameOver = true;
         if (reviveTime > 0)
         {
-            UIManager.Ins.OnShowReviveUI();
+            UIManager.Ins.reviveUIView.OnShowReviveUI();
             Time.timeScale = 0.0f;
             isReviveWait = true;
         }
         else
         {
             Debug.Log("Level Fail");
-            UIManager.Ins.OnShowFailUI();
+            UIManager.Ins.OnShowPopUp(UIManager.Ins.levelFailView.gameObject,true);
             Time.timeScale = 0.0f;
         }
     }

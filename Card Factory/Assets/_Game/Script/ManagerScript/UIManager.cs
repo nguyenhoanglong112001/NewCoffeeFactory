@@ -15,14 +15,12 @@ public class UIManager : Singleton<UIManager>
     public LevelCompleteView levelCompleteView;
     public ReviveUIView reviveUIView;
     public LevelFailView levelFailView;
+    public SettingUIView settingUIView;
+    public QuitNotifyView quitNotifyView;
 
     public Button addQueueButton;
     public Button OnCloseShopUI;
-    public Button giveUpBt;
-    public Button replayBt;
-    public Button restarQuitBt;
-    public Button quitBt;
-    public Button restartBt;
+
 
     public Button addCapacityConvey;
     public Button swapBt;
@@ -44,34 +42,21 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text removePackCount;
     public TMP_Text addQueuesCost;
     public TMP_Text levelText;
-    public TMP_Text reviveCostText;
 
-    public GameObject failUI;
-    public GameObject reviveUI;
     public GameObject addConveyPopUp;
     public GameObject addQueueBooster;
     public GameObject swapBooster;
     public GameObject destroyPackBooster;
-    public GameObject SettingPopUp;
-    public GameObject quitNotify;
-    public GameObject notify;
 
 
     public Dictionary<BoosterType, TMP_Text> boostersCostText;
     public Dictionary<BoosterType, TMP_Text> boostersCountText;
     public Dictionary<BoosterType, GameObject> boosterObject;
 
-    public Slider musicSlider;
-    public Slider soundSlider;
-
-    public ToggleSwitch musicToggle;
-    public ToggleSwitch soundToggle;
-
     public GameObject shopUI;
     public GameObject boosterNotice;
     private Vector2 _noticeShowPos;
     private Vector2 _noticeHidePos;
-    private Vector2 _notifyOrgPos;
     BoosterManager boosterManager;
 
 
@@ -114,32 +99,6 @@ public class UIManager : Singleton<UIManager>
         OnCheckLevelBooster();
         float canvasWidth = ((RectTransform)mainCanvas.transform).rect.width;
         _noticeHidePos = new Vector2(canvasWidth, _noticeShowPos.y);
-        musicSlider.onValueChanged.AddListener(AudioManager.Ins.SetMusicVolume);
-        soundSlider.onValueChanged.AddListener(AudioManager.Ins.SetSFXVolume);
-
-        musicToggle.sliderValue = PlayerPrefs.GetFloat("MusicVolume", 1f);
-        soundToggle.sliderValue = PlayerPrefs.GetFloat("SoundVolume", 1f);
-        OnCheckBt();
-    }
-
-    private void Start()
-    {
-        giveUpBt.onClick.AddListener(OnContinuePress);
-        _notifyOrgPos = notify.GetComponent<RectTransform>().anchoredPosition;
-        quitBt.onClick.AddListener(() =>
-        {
-            OnQuitPress();
-            restarQuitBt.onClick.RemoveAllListeners();
-            restarQuitBt.GetComponentInChildren<TMP_Text>().text = "Quit";
-            restarQuitBt.onClick.AddListener(OnContinuePress);
-        });
-        restartBt.onClick.AddListener(() =>
-        {
-            OnQuitPress();
-            restarQuitBt.onClick.RemoveAllListeners();
-            restarQuitBt.GetComponentInChildren<TMP_Text>().text = "Replay";
-            restarQuitBt.onClick.AddListener(OnReplayPress);
-        });
     }
 
 
@@ -167,65 +126,38 @@ public class UIManager : Singleton<UIManager>
         addSlotTxt.text = "+ " + GameManager.Ins.BoosterManager.NumberSlotAdd + " Slots";
     }
 
-    public void OnShowWinUI()
+    public void OnShowPopUp(GameObject popUp, bool isShow)
     {
-        levelCompleteView.gameObject.SetActive(true);
-    }
-
-    public void OnShowFailUI()
-    {
-        CanvasGroup canvasgroup = failUI.GetComponent<CanvasGroup>();
-        failUI.SetActive(true);
-        canvasgroup.alpha = 0f;
-        canvasgroup.DOFade(1f, 0.3f).SetUpdate(true);
-    }
-
-    public void OnShowReviveUI()
-    {
-        CanvasGroup canvasgroup = reviveUI.GetComponent<CanvasGroup>();
-        reviveUI.SetActive(true);
-        canvasgroup.alpha = 0f;
-        canvasgroup.DOFade(1f, 0.3f).SetUpdate(true);
-        reviveCostText.text = GameManager.Ins.rewardConfig.reviveCost.ToString();
+        popUp.SetActive(isShow);
     }
 
     public void OnShowSettingPopUp(GameObject pannel)
     {
-        if(SettingPopUp.activeSelf)
+        if(settingUIView.gameObject.activeSelf)
         {
-            OnResumePress();
+            settingUIView.OnResumePress();
             return;
         }
-        SettingPopUp.SetActive(true);
-        Vector3 orgScale = pannel.transform.localScale;
-        pannel.transform.localScale = Vector3.zero;
-        pannel.transform.DOScale(orgScale, 0.3f)
-            .SetUpdate(true);
-        Time.timeScale = 0.0f;
+        settingUIView.gameObject.SetActive(true);
     }
 
-    public void OnNoRevivePress()
+    public void OnReplayPress()
     {
-        reviveUI.SetActive(false);
-        OnShowFailUI();
+        if (!LevelManager.Ins.isGameOver)
+        {
+            if (GameManager.Ins.GetCurrentHearts() <= 0)
+            {
+                return;
+            }
+            else
+            {
+                GameManager.Ins.SpendHeart();
+            }
+        }
+        GameManager.Ins.OnChangeGameState(GameManager.GameState.GamePlay);
+        GameManager.Ins.InitGame();
     }
 
-    public void OnRevivePress()
-    {
-        if(GameManager.Ins.currentGold < GameManager.Ins.rewardConfig.reviveCost)
-        {
-            OnShowShopUI();
-        }
-        else
-        {
-            Time.timeScale = 1.0f;
-            GameManager.Ins.BoosterManager.OnAddQueueSlot();
-            LevelManager.Ins.reviveTime--;
-            LevelManager.Ins.isReviveWait = false;
-            
-            reviveUI.SetActive(false);
-        }
-    }
 
     public void OnShowCoinUI(int currentCoin)
     {
@@ -274,10 +206,7 @@ public class UIManager : Singleton<UIManager>
         rect.DOAnchorPos(Vector2.zero, 0.5f).SetEase(Ease.OutBack).SetUpdate(true);
     }
 
-    public void OnCloseBtPress(GameObject ui)
-    {
-        ui.SetActive(false);
-    }
+
     public void OnShowAddConveyPopUp(RectTransform posSpawn, Vector3 uiTargetPos, Action onComplete)
     {
         GameManager.Ins.poolManager.poolPopup.Prefab = addConveyPopUp;
@@ -400,59 +329,5 @@ public class UIManager : Singleton<UIManager>
     public void OnShowLevelText()
     {
         levelText.text = "Level " + GameManager.Ins.currentLevel;
-    }
-
-    public void OnReplayPress()
-    {
-        if(!LevelManager.Ins.isGameOver)
-        {
-            if(GameManager.Ins.GetCurrentHearts() <= 0)
-            {
-                return;
-            }    
-            else
-            {
-                GameManager.Ins.SpendHeart();
-            }
-        }
-        GameManager.Ins.OnChangeGameState(GameManager.GameState.GamePlay);
-        GameManager.Ins.InitGame();
-    }
-
-    public void OnResumePress()
-    {
-        Time.timeScale = 1.0f;
-        SettingPopUp.SetActive(false);
-    }
-
-    public void OnQuitPress()
-    {
-        quitNotify.SetActive(true);
-        RectTransform rect = notify.GetComponent<RectTransform>();
-
-        rect.anchoredPosition = _notifyOrgPos + new Vector2(0, -Screen.height);
-        rect.DOAnchorPos(_notifyOrgPos, 0.3f)
-            .SetEase(Ease.OutBack)
-            .SetUpdate(true);
-    }
-
-    public void OnNoLeavePress()
-    {
-        RectTransform rect = notify.GetComponent<RectTransform>();
-        Vector2 currentPos = rect.anchoredPosition;
-
-        rect.DOAnchorPos(currentPos + new Vector2(0, -Screen.height), 0.3f)
-            .SetEase(Ease.InBack)
-            .SetUpdate(true)
-            .OnComplete(() =>
-            {
-                quitNotify.SetActive(false);
-            });
-    }
-
-    public void OnCheckBt()
-    {
-        quitBt.gameObject.SetActive(!GameManager.Ins.isFirstTime);
-        restartBt.gameObject.SetActive(!GameManager.Ins.isFirstTime);
     }
 }

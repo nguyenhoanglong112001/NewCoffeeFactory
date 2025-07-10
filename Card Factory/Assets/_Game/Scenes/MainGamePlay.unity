@@ -1641,6 +1641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 72822212}
   - component: {fileID: 72822213}
+  - component: {fileID: 72822214}
   m_Layer: 5
   m_Name: LevelFailUI
   m_TagString: Untagged
@@ -1681,6 +1682,21 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &72822214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72822211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67cdbebecb1ac8d419714f2f5591cd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  giveUpBt: {fileID: 775779075}
+  replayBt: {fileID: 490802313}
+  canvasGroup: {fileID: 72822213}
 --- !u!1 &74164909
 GameObject:
   m_ObjectHideFlags: 0
@@ -6439,15 +6455,12 @@ MonoBehaviour:
   featureUIView: {fileID: 19035350}
   boosterView: {fileID: 2021026795}
   levelCompleteView: {fileID: 1037173425}
-  reviveUIView: {fileID: 0}
-  levelFailView: {fileID: 0}
+  reviveUIView: {fileID: 1985992493}
+  levelFailView: {fileID: 72822214}
+  settingUIView: {fileID: 4552772482314449676}
+  quitNotifyView: {fileID: 1101979461}
   addQueueButton: {fileID: 375058388}
   OnCloseShopUI: {fileID: 970541789}
-  giveUpBt: {fileID: 775779075}
-  replayBt: {fileID: 490802313}
-  restarQuitBt: {fileID: 1078064067}
-  quitBt: {fileID: 40352220}
-  restartBt: {fileID: 5018074060269010941}
   addCapacityConvey: {fileID: 1887731592}
   swapBt: {fileID: 2067182522}
   removePack: {fileID: 323142302}
@@ -6463,20 +6476,10 @@ MonoBehaviour:
   removePackCount: {fileID: 1713577957}
   addQueuesCost: {fileID: 948307844}
   levelText: {fileID: 1049658066}
-  reviveCostText: {fileID: 1147318226}
-  failUI: {fileID: 72822211}
-  reviveUI: {fileID: 1985992490}
   addConveyPopUp: {fileID: 7698809629492892840, guid: 53ba1f8b39dbf284baf7a462f5b3f335, type: 3}
   addQueueBooster: {fileID: 1887731590}
   swapBooster: {fileID: 2067182520}
   destroyPackBooster: {fileID: 323142300}
-  SettingPopUp: {fileID: 4552772482314449675}
-  quitNotify: {fileID: 1101979459}
-  notify: {fileID: 848514988}
-  musicSlider: {fileID: 7732608130350232061}
-  soundSlider: {fileID: 8228435750188859505}
-  musicToggle: {fileID: 7732608130350232062}
-  soundToggle: {fileID: 8961348358891672962}
   shopUI: {fileID: 1228606421}
   boosterNotice: {fileID: 1802776956}
 --- !u!4 &341442080
@@ -15146,7 +15149,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.0000069141, y: -35}
+  m_AnchoredPosition: {x: -0.0000069141, y: -34.99994}
   m_SizeDelta: {x: 1201.92, y: 498.4263}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &975441740
@@ -16309,6 +16312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1101979460}
+  - component: {fileID: 1101979461}
   m_Layer: 5
   m_Name: QuitNotify
   m_TagString: Untagged
@@ -16337,6 +16341,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1101979461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101979459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ffae2bdf9f3a59498780f05bf79b4b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notifyRect: {fileID: 848514989}
+  _notifyOrgPos: {x: 0, y: 0}
+  noLeaveBt: {fileID: 219901555}
+  leaveBt: {fileID: 1078064067}
 --- !u!1 &1111168928
 GameObject:
   m_ObjectHideFlags: 0
@@ -28898,6 +28918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1985992491}
   - component: {fileID: 1985992492}
+  - component: {fileID: 1985992493}
   m_Layer: 5
   m_Name: ReviveUI
   m_TagString: Untagged
@@ -28937,6 +28958,22 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1985992493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985992490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d9751a6f63846d43b11dc38d7bda592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noRevive: {fileID: 1478446507}
+  reviveBt: {fileID: 1969127548}
+  reviveCostText: {fileID: 1147318226}
+  canvasGroup: {fileID: 1985992492}
 --- !u!1 &1991338805
 GameObject:
   m_ObjectHideFlags: 0
@@ -33430,6 +33467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2992758474581315784}
+  - component: {fileID: 4552772482314449676}
   m_Layer: 5
   m_Name: SettingPopUp
   m_TagString: Untagged
@@ -33437,6 +33475,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &4552772482314449676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4552772482314449675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e27332d48a865e459677c4ab96240b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSlider: {fileID: 7732608130350232061}
+  soundSlider: {fileID: 8228435750188859505}
+  musicToggle: {fileID: 7732608130350232062}
+  soundToggle: {fileID: 8961348358891672962}
+  quitBt: {fileID: 40352220}
+  restartBt: {fileID: 5018074060269010941}
+  cotinueBt: {fileID: 4081992493877829757}
+  buttonRestartText: {fileID: 309726189}
+  popUpHolder: {fileID: 1750714880721355147}
 --- !u!1 &4561075801677407459
 GameObject:
   m_ObjectHideFlags: 0
@@ -34814,7 +34873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -43.570007, y: 244.11646}
+  m_AnchoredPosition: {x: -43.57007, y: 244.11646}
   m_SizeDelta: {x: 147.36, y: -655.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7729823623645380072
@@ -35675,7 +35734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5799685721759485389, guid: 582cd4b9e719f7c4fbfd8b5954d6386c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.76
+      value: -1.54
       objectReference: {fileID: 0}
     - target: {fileID: 5799685721759485389, guid: 582cd4b9e719f7c4fbfd8b5954d6386c, type: 3}
       propertyPath: m_LocalRotation.w
