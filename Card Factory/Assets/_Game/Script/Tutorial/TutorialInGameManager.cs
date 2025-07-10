@@ -47,7 +47,7 @@ public class TutorialInGameManager : Singleton<TutorialInGameManager>
         stage.OnEndStage(callback);
     }
 
-    public void OnActiveTutorial(Vector3 handPoint,Vector3 offset)
+    public void OnActiveTutorial(Vector3 handPoint)
     {
         Tutorial tutorial = GetCurrentTut();
         if (tutorial != null)
@@ -55,7 +55,7 @@ public class TutorialInGameManager : Singleton<TutorialInGameManager>
             if (!tutorial.isCompleteTut)
             {
                 TutorialStage currentStage = tutorial.GetCurrentStage();
-                currentStage.SetHandPointPos(handPoint, offset);
+                currentStage.SetHandPointPos(handPoint);
                 tutorial.StartTutStage(() =>
                 {
                     if(currentTutIndex == 1)

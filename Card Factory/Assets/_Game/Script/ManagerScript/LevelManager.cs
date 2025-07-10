@@ -72,13 +72,13 @@ public class LevelManager : Singleton<LevelManager>
             }
             TutorialInGameManager.Ins.StartTut();
             TutorialStage currentStage = TutorialInGameManager.Ins.GetCurrentTut().GetCurrentStage();
-            currentStage.SetHandPointPos(queues[0].cardPos[0], new Vector3(-1, 3, -9));
+            currentStage.SetHandPointPos(queues[0].handPointTutPos.position);
         }
         if (levelLoad == 2)
         {
             TutorialInGameManager.Ins.StartTut();
             TutorialStage currentStage = TutorialInGameManager.Ins.GetCurrentTut().GetCurrentStage();
-            currentStage.SetHandPointPos(queues[0].cardPos[0], new Vector3(-1, 3, -9));
+            currentStage.SetHandPointPos(queues[0].handPointTutPos.position);
         }
     }
 

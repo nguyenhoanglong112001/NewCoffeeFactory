@@ -76,7 +76,7 @@ public class CardHolder : MonoBehaviour
             {
                 if(TutorialInGameManager.Ins.currentTutIndex == 1)
                 {
-                    TutorialInGameManager.Ins.OnActiveTutorial(LevelManager.Ins.queues[1].cardPos[0], new Vector3(2.5f, 3, -9));
+                    TutorialInGameManager.Ins.OnActiveTutorial(LevelManager.Ins.queues[1].handPointTutPos.position);
                 }
             }
             AudioManager.Ins.PlaySound("CompletePack");
@@ -138,7 +138,7 @@ public class CardHolder : MonoBehaviour
     {
         foreach(var rend in rends)
         {
-            Material newMat = objectcolor.GetColor(colorHolder);
+            Material newMat = objectcolor.GetPackColor(colorHolder);
             rend.material = newMat;
         }
     }

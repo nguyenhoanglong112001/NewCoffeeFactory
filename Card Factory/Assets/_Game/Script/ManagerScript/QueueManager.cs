@@ -14,6 +14,8 @@ public class QueueManager : MonoBehaviour
     public List<QueueSlot> extendSlot;
 
     public GameObject extenderObject;
+    public Transform handPointTutPos;
+    public Transform handPointAddQueueTut;
 
     public bool isFull => GetCurrentCardQueue() >= avaliableQueues.Count;
 
@@ -100,7 +102,7 @@ public class QueueManager : MonoBehaviour
         yield return new WaitUntil(() => isFull);
         TutorialInGameManager.Ins.StartTut();
         TutorialStage currentStage = TutorialInGameManager.Ins.GetCurrentTut().GetCurrentStage();
-        currentStage.SetHandPointPos(UIManager.Ins.addQueueButton.gameObject.transform.position, new Vector3(0,1,-2));
+        currentStage.SetHandPointPos(handPointAddQueueTut.position);
     }
 
     IEnumerator WaitToRevive()

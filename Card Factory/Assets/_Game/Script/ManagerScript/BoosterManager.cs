@@ -44,6 +44,10 @@ public class BoosterManager : MonoBehaviour
 
     private Tween shakeTween;
 
+    [Header("HandTutPos")]
+    public Transform swapTutHandPos;
+    public Transform addConveyHAndPos;
+
     public int NumberSlotAdd { get => numberSlotAdd; set => numberSlotAdd = value; }
     public int NumberAdd { get => numberAdd; set => numberAdd = value;}
 
@@ -502,7 +506,7 @@ public class BoosterManager : MonoBehaviour
                     }
                 });
                 TutorialStage currentStage = TutorialInGameManager.Ins.GetCurrentTut().GetCurrentStage();
-                currentStage.SetHandPointPos(UIManager.Ins.swapBt.gameObject.transform.position, new Vector3(1, 1, -1.5f));
+                currentStage.SetHandPointPos(swapTutHandPos.position);
             }
         }
     }

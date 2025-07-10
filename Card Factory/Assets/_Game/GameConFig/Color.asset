@@ -14,16 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colors:
   - color: 0
-    colorMat: {fileID: 2100000, guid: 0269ed027345ca64b81f8c096c0e22f0, type: 2}
+    colorMat: {fileID: 2100000, guid: b24ba3d7c3d078b48938d765e29f260c, type: 2}
   - color: 2
-    colorMat: {fileID: 2100000, guid: 97547b4736335c64bb3e3186482fc301, type: 2}
+    colorMat: {fileID: 2100000, guid: 3b36d1c93e6f89d4ab7c4dd685db3a16, type: 2}
   - color: 1
-    colorMat: {fileID: 2100000, guid: fa1a403618c710f488c0225e0f100b26, type: 2}
+    colorMat: {fileID: 2100000, guid: a8f74f4a89b5e804fbe3d38235d23356, type: 2}
   - color: 3
-    colorMat: {fileID: 2100000, guid: 687405773767b724aa53302304cc7501, type: 2}
+    colorMat: {fileID: 2100000, guid: 3250b08d7873f3f4d8f83119eab7890f, type: 2}
   - color: 4
-    colorMat: {fileID: 2100000, guid: 228c92b5beed1804d9031e0e6b6aaa41, type: 2}
+    colorMat: {fileID: 2100000, guid: 7af5112762d070f488d751ad71f8cb22, type: 2}
   - color: 5
-    colorMat: {fileID: 2100000, guid: d42519467d4ade6469cb4fe18042e35a, type: 2}
+    colorMat: {fileID: 2100000, guid: a6347f60b594aac42916c73fd4db8e82, type: 2}
   - color: 6
-    colorMat: {fileID: 2100000, guid: 63cbf43822c27c54783d8b1d6e6d97e0, type: 2}
+    colorMat: {fileID: 2100000, guid: 4c33b6263d78df944b62e9cf2a46fb79, type: 2}
+  packColors:
+  - packColor: 0
+    packMat: {fileID: 2100000, guid: 0269ed027345ca64b81f8c096c0e22f0, type: 2}
+  - packColor: 2
+    packMat: {fileID: 2100000, guid: 97547b4736335c64bb3e3186482fc301, type: 2}
+  - packColor: 1
+    packMat: {fileID: 2100000, guid: fa1a403618c710f488c0225e0f100b26, type: 2}
+  - packColor: 3
+    packMat: {fileID: 2100000, guid: 687405773767b724aa53302304cc7501, type: 2}
+  - packColor: 4
+    packMat: {fileID: 2100000, guid: 228c92b5beed1804d9031e0e6b6aaa41, type: 2}
+  - packColor: 5
+    packMat: {fileID: 2100000, guid: d42519467d4ade6469cb4fe18042e35a, type: 2}
+  - packColor: 6
+    packMat: {fileID: 2100000, guid: 63cbf43822c27c54783d8b1d6e6d97e0, type: 2}

@@ -12,6 +12,7 @@ public class CardQueue : MonoBehaviour
     public Vector3 spacing;
 
     public Transform transParent;
+    public Transform handPointTutPos;
 
     private void Start()
     {

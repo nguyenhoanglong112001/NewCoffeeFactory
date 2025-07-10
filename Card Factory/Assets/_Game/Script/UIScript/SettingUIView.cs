@@ -20,6 +20,7 @@ public class SettingUIView : MonoBehaviour
 
     public TMP_Text buttonRestartText;
     public GameObject popUpHolder;
+    public CanvasGroup canvasgroup;
 
     private void OnEnable()
     {
@@ -62,16 +63,28 @@ public class SettingUIView : MonoBehaviour
 
     public void OnResumePress()
     {
-        Time.timeScale = 1.0f;
-        this.gameObject.SetActive(false);
+        Vector3 orgScale = popUpHolder.transform.localScale;
+        Sequence s = DOTween.Sequence();
+        s.Append(popUpHolder.transform.DOScale(Vector3.zero, 0.5f));
+        s.Join(canvasgroup.DOFade(0.0f, 0.5f));
+        s.SetUpdate(true);
+        s.OnComplete(() =>
+        {
+            Time.timeScale = 1.0f;
+            this.gameObject.SetActive(false);
+            popUpHolder.transform.localScale = orgScale;
+        });
     }
 
     public void OnShowSettingView()
     {
+        Sequence s = DOTween.Sequence();
         Vector3 orgScale = popUpHolder.transform.localScale;
         popUpHolder.transform.localScale = Vector3.zero;
-        popUpHolder.transform.DOScale(orgScale, 0.3f)
-            .SetUpdate(true);
+        s.Append(popUpHolder.transform.DOScale(orgScale, 0.5f));
+        canvasgroup.alpha = 0.0f;
+        s.Join(canvasgroup.DOFade(1.0f, 0.5f));
+        s.SetUpdate(true);
         Time.timeScale = 0.0f;
     }
 }

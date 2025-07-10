@@ -48,6 +48,6 @@ MonoBehaviour:
   listColor: 0
   queue: {fileID: 0}
   numberCard: 6
-  cardPrefab: {fileID: 1092608741558560438, guid: 52834ce3a0c266e41990a0de39c03d38, type: 3}
+  cardPrefab: {fileID: 238524689739085870, guid: f6fe090938966d34cab8a1934e2d9784, type: 3}
   mechanicType: 0
   currentMechanic: {fileID: 0}

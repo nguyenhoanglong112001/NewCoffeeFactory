@@ -30,10 +30,10 @@ public class TutorialStage : MonoBehaviour
         callback?.Invoke();
     }
 
-    public void SetHandPointPos(Vector3 pos, Vector3 offset)
+    public void SetHandPointPos(Vector3 pos)
     {
 
-        handPoint.transform.position = pos + offset;
+        handPoint.transform.position = pos;
         Debug.Log("Setpoit : " + handPoint.transform.position);
     }
 }

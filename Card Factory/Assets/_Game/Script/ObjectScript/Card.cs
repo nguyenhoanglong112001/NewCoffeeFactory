@@ -295,7 +295,7 @@ public class Card : MonoBehaviour
         {
             if (TutorialInGameManager.Ins.GetCurrentTutStage() == (2, 3))
             {
-                TutorialInGameManager.Ins.OnActiveTutorial(GameManager.Ins.QueueManager.gameObject.transform.position, new Vector3(-5, 2, -2));
+                TutorialInGameManager.Ins.OnActiveTutorial(GameManager.Ins.QueueManager.handPointTutPos.position);
             }
         }
         this.transform.DOJump(queueSlot.transform.position, 3f, 1, 0.5f)
@@ -404,7 +404,7 @@ public class Card : MonoBehaviour
             {
                 if (tutStage != (2, 3))
                 {
-                    TutorialInGameManager.Ins.OnActiveTutorial(LevelManager.Ins.queues[0].cardPos[0], new Vector3(-1, 3, -9));
+                    TutorialInGameManager.Ins.OnActiveTutorial(LevelManager.Ins.queues[0].handPointTutPos.position);
                 }
             }
         }
@@ -425,7 +425,7 @@ public class Card : MonoBehaviour
                     }
                 });
                 TutorialStage currentStage = TutorialInGameManager.Ins.GetCurrentTut().GetCurrentStage();
-                currentStage.SetHandPointPos(UIManager.Ins.addCapacityConvey.gameObject.transform.position, new Vector3(1, 1, -1.5f));
+                currentStage.SetHandPointPos(GameManager.Ins.BoosterManager.addConveyHAndPos.position);
             }
         }
     }
