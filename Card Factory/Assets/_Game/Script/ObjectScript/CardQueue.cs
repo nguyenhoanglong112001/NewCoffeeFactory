@@ -8,8 +8,9 @@ public class CardQueue : MonoBehaviour
 {
     public List<Card> cards;
     public List<CardList> cardLists;
-    public List<Vector3> cardPos;
+    [HideInInspector] public List<Vector3> cardPos;
     public Vector3 spacing;
+    public Transform posSpawnGroup;
 
     public Transform transParent;
     public Transform handPointTutPos;

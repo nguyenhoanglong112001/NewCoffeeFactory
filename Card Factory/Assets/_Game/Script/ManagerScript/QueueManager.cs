@@ -65,7 +65,7 @@ public class QueueManager : MonoBehaviour
             card.currentQueueSlot = avaliableQueues[index];
             avaliableQueues[index].SetCardOnQueue(card);
             card.transform.DOJump(
-                    avaliableQueues[index].transform.position,
+                    avaliableQueues[index].queuePos.position,
                     2f,
                     1,
                     0.6f

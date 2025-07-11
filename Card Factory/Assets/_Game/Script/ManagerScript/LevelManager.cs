@@ -184,7 +184,7 @@ public class LevelManager : Singleton<LevelManager>
                     GameManager.Ins.poolManager.cardGroupPool.Prefab = cardPrefab.gameObject;
                     GameObject cardObj = GameManager.Ins.poolManager.cardGroupPool.Spawn(Vector3.zero, Quaternion.identity);
                     cardObj.transform.SetParent(cardqueue.transParent);
-                    cardObj.transform.localPosition = Vector3.zero;
+                    cardObj.transform.localPosition = cardqueue.posSpawnGroup.localPosition;
                     cardObj.transform.localRotation = Quaternion.identity;
                     CardList card = cardObj.GetComponent<CardList>();
                     card.numberCard = cardList.cardNumber;

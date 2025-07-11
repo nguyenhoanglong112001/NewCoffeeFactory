@@ -32,6 +32,7 @@ public class Card : MonoBehaviour
     public Outline cardOutline;
 
     [HideInInspector] public Vector3 lastPosOnQueue;
+    public GameObject plate;
 
 
 
@@ -281,6 +282,7 @@ public class Card : MonoBehaviour
 
     private void MoveToQueue(QueueSlot queueSlot)
     {
+        Sequence s = DOTween.Sequence();
         queueSlot.SetCardOnQueue(this);
         currentQueueSlot = queueSlot;
         for (int i = 0; i < queueManager.cardInQueue.Count; i++)
@@ -298,8 +300,9 @@ public class Card : MonoBehaviour
                 TutorialInGameManager.Ins.OnActiveTutorial(GameManager.Ins.QueueManager.handPointTutPos.position);
             }
         }
-        this.transform.DOJump(queueSlot.transform.position, 3f, 1, 0.5f)
-            .SetUpdate(true)
+        s.Append(this.transform.DOJump(queueSlot.queuePos.position, 3f, 1, 0.5f));
+        s.Join(this.transform.DOLocalRotate(new Vector3(90, 90, 90), 0.5f));
+        s.SetUpdate(true)
             .OnComplete(() =>
             {
                 canPress = true;
@@ -327,6 +330,7 @@ public class Card : MonoBehaviour
             conveyorManager.SetSpline(follower);
             conveyorManager.OnAddFollower(follower);
             follower.enabled = false;
+            this.plate.SetActive(true);
             conveyorManager.CheckSpacing(follower);
         });
     }
@@ -494,11 +498,11 @@ public class Card : MonoBehaviour
     public void MoveToHolder(CardHolder cupsHolder)
     {
         if (cupsHolder.colorHolder != color) return;
+        RemovePlate();
         AudioManager.Ins.PlaySound("CardSound");
 
         // Đăng ký card đang di chuyển
         cupsHolder.RegisterMovingCard();
-
         Sequence moveToHolder = DOTween.Sequence();
 
         foreach (var holdercard in cupsHolder.cardHolderPos)
@@ -506,7 +510,16 @@ public class Card : MonoBehaviour
             if (holdercard.childCount <= 0)
             {
                 holderPos = holdercard;
+
+                // Lưu scale hiện tại trước khi setParent
+                Vector3 originalScale = this.transform.localScale;
+
+                // SetParent với worldPositionStays = false để giữ nguyên local scale
                 this.transform.SetParent(holderPos);
+
+                // Khôi phục scale gốc
+                this.transform.localScale = originalScale;
+
                 break;
             }
         }
@@ -523,7 +536,6 @@ public class Card : MonoBehaviour
         Tween jumpTween = transform.DOLocalJump(Vector3.zero, 3f, 1, 0.5f);
         moveToHolder.Append(jumpTween);
 
-        Vector3 orgScale = cupsHolder.transform.localScale;
         moveToHolder.OnComplete(() =>
         {
             cupsHolder.packAnimation.Play();
@@ -531,11 +543,37 @@ public class Card : MonoBehaviour
             cardList.cards.Remove(this);
             cardList.CheckCard();
             CheckList();
-
             cupsHolder.UnregisterMovingCard();
 
-            this.transform.localScale = Vector3.one;
+            // Chỉ set scale = Vector3.one nếu bạn thực sự muốn
+            // Nếu muốn giữ nguyên scale gốc thì comment dòng này
+            // this.transform.localScale = Vector3.one;
         });
+    }
+
+    private void RemovePlate()
+    {
+        StartCoroutine(RemovePlateCoroutine());
+    }
+
+    private IEnumerator RemovePlateCoroutine()
+    {
+        SplineFollower plateFollow = plate.GetComponent<SplineFollower>();
+        double currentPercent = follower.GetPercent();
+        plate.transform.SetParent(null);
+        plateFollow.spline = follower.spline;
+        plateFollow.enabled = true;
+
+        yield return null;
+
+        plateFollow.SetPercent(currentPercent);
+        plateFollow.follow = true;
+        plateFollow.onEndReached += OnPlateReachEnd;
+    }
+
+    private void OnPlateReachEnd(double d)
+    {
+        Destroy(plate);
     }
 
     public void ChangeCardColor()
